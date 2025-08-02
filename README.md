@@ -9,7 +9,7 @@ A Progressive Web App for LU Disaster and Relief Operations. This is an open-sou
 - Multilanguage to support local dialects
 - CMS with WYSIWYG editor for easy content uploading/editing in multiple languages
 - Authentication and user permissioning system for volunteers submitting field reports, writers' articles and site copywriting, and approvers for content submitted.
-- Approval workflow for publishing and 
+- Approval workflow for publishing and editing content
 
 ## Get Involved
 We welcome contributions from developers, designers, organizers, content creators and volunteers. Check the [Projects](#) and [Issues](#) tabs to find tasks.
