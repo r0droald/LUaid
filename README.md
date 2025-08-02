@@ -1,4 +1,4 @@
-# LUaid.app - LU Disaster and Relief Operations
+# LUaid.org - LU Disaster and Relief Operations
 A Progressive Web App for LU Disaster and Relief Operations. This is an open-source project built to track and visualize donations, volunteer deployments, and aid distribution in the wake of Typhoon Emong in La Union, Philippines. We publish this in the hopes of being useful for disaster relief operations in your location.
 
 ## Features
