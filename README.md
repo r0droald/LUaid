@@ -22,4 +22,4 @@ We welcome contributions from developers, designers, organizers, content creator
 - Vercel or Netlify hosting
 
 ## License
-This repository's source code is available under the [MIT License](LICENSE)
+This repository's source code is available under the [MIT License](LICENSE). Usage, modifications, distribution, and contributions are welcome. We encourage community collaboration and repurposing of this work. Copyright © 2025 LUaid.org
