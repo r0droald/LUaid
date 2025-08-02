@@ -2,10 +2,13 @@
 A Progressive Web App for LU Disaster and Relief Operations. This is an open-source project built to track and visualize donations, volunteer deployments, and aid distribution in the wake of Typhoon Emong in La Union, Philippines. We publish this in the hopes of being useful for disaster relief operations in your location.
 
 ## Features
+- Zero-budget build and running on free-tier services/tools to support volunteer-driven initiatives
+- Offline-ready PWA with form sync and data caching
 - Realtime dashboards for donations, deployments, and requests
 - Map integration to visualize field operations
-- Offline-ready PWA with form sync and data caching
-- Built on free-tier services to support volunteer-driven initiatives
+- Multilanguage to support local dialects
+- CMS with WYSIWYG editor for easy content uploading/editing in multiple languages
+- Authentication and user permissioning system
 
 ## Get Involved
 We welcome contributions from developers, designers, organizers, content creators and volunteers. Check the [Projects](#) and [Issues](#) tabs to find tasks.
