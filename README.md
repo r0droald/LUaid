@@ -22,4 +22,4 @@ We welcome contributions from developers, designers, organizers, content creator
 - Vercel or Netlify hosting
 
 ## License
-[MIT](LICENSE)
+This repository's source code is available under the [MIT License](LICENSE)
