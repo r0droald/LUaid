@@ -37,4 +37,4 @@ We welcome contributions from developers, designers, organizers, content creator
   - Free hosting on InfinityFree/AccuWeb/Wordpress.com/Freehostia/000webhost
 
 ## License
-This repository's source code is available under the [MIT License](LICENSE). Please feel free to use, modify, distribute and contribute to this project. We encourage community collaboration and repurposing of this work. Copyright © 2025 LUaid.org
+This repository's source code is available under the [MIT License](LICENSE). Please feel free to use, modify, distribute, publish, sublicense and contribute to this project. We encourage community collaboration and repurposing of this work. Copyright © 2025 LUaid.org
