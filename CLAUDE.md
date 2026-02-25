@@ -39,14 +39,41 @@ This is a collaborative open-source project. The main repo is `r0droald/LUaid`. 
 ## Commands
 
 ```bash
-# Dev server (to be configured)
+# Dev server (Turbopack — no service worker in dev)
 npm run dev
 
-# Build
+# Production build (webpack — generates service worker)
 npm run build
+
+# Start production server
+npm run start
 
 # Lint
 npm run lint
+```
+
+## Project Structure
+
+```
+src/
+  app/
+    [locale]/       # Locale-based routing (en, fil, ilo)
+      layout.js     # Root layout with NextIntlClientProvider
+      page.js       # Homepage
+      ~offline/     # Offline fallback page (Serwist)
+    globals.css     # Global styles (Tailwind)
+    sw.js           # Service worker source (Serwist)
+  components/       # Reusable UI components
+  hooks/            # Custom React hooks
+  lib/              # Utilities, API clients, helpers
+  i18n/
+    routing.js      # Locale definitions
+    request.js      # Server-side i18n config
+  middleware.js     # Locale detection/redirect
+messages/           # Translation files (en.json, fil.json, ilo.json)
+public/
+  manifest.json     # PWA manifest
+  icons/            # PWA icons
 ```
 
 ## Open Issues Tracking
