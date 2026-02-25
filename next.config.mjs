@@ -1,5 +1,8 @@
 import { spawnSync } from "node:child_process";
 import withSerwistInit from "@serwist/next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.js");
 
 const revision =
   spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf-8" }).stdout?.trim() ??
@@ -11,6 +14,8 @@ const withSerwist = withSerwistInit({
   swDest: "public/sw.js",
 });
 
-export default withSerwist({
-  // Next.js config options here
-});
+export default withSerwist(
+  withNextIntl({
+    // Next.js config options here
+  })
+);

@@ -1,0 +1,11 @@
+{
+  "App": {
+    "title": "LUaid.org",
+    "description": "Transparency ti Disaster Relief"
+  },
+  "Navigation": {
+    "home": "Pagtaengan",
+    "dashboard": "Dashboard",
+    "volunteer": "Boluntario"
+  }
+}

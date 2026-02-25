@@ -1,0 +1,11 @@
+{
+  "App": {
+    "title": "LUaid.org",
+    "description": "Transparency sa Disaster Relief"
+  },
+  "Navigation": {
+    "home": "Tahanan",
+    "dashboard": "Dashboard",
+    "volunteer": "Boluntaryo"
+  }
+}
