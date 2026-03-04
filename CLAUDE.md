@@ -50,6 +50,12 @@ npm run start
 
 # Lint
 npm run lint
+
+# Run tests (once)
+npm test
+
+# Run tests (watch mode)
+npm run test:watch
 ```
 
 ## Project Structure
