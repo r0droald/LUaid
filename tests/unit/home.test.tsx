@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import HomePage from "@/app/[locale]/page";
 
 vi.mock("next-intl", () => ({
-  useTranslations: () => (key) => key,
+  useTranslations: () => (key: string) => key,
 }));
 
 describe("HomePage", () => {
