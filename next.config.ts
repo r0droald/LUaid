@@ -2,7 +2,7 @@ import { spawnSync } from "node:child_process";
 import withSerwistInit from "@serwist/next";
 import createNextIntlPlugin from "next-intl/plugin";
 
-const withNextIntl = createNextIntlPlugin("./src/i18n/request.js");
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const revision =
   spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf-8" }).stdout?.trim() ??
@@ -10,7 +10,7 @@ const revision =
 
 const withSerwist = withSerwistInit({
   additionalPrecacheEntries: [{ url: "/~offline", revision }],
-  swSrc: "src/app/sw.js",
+  swSrc: "src/app/sw.ts",
   swDest: "public/sw.js",
 });
 
