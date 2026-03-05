@@ -7,19 +7,19 @@ LUaid.org is an open-source Progressive Web App for disaster relief operations i
 ## Architecture
 
 - **Frontend**: Next.js (App Router) + TypeScript (strict mode), hosted on Vercel
-- **Database**: Supabase (Postgres + Auth + Realtime + Storage) — proposed, pending team approval; current prototype uses Google Sheets
+- **Database**: Supabase (Postgres) — server-side only via service role key, never exposed to browser
 - **CMS**: WordPress backend at cms.LUaid.org (REST API for content)
-- **Maps**: Leaflet + OpenStreetMap — proposed, pending team approval
-- **PWA**: Service workers for offline caching, IndexedDB for local data, background sync
+- **Maps**: Leaflet + OpenStreetMap (planned — Issue #7)
+- **PWA**: Serwist service worker for offline caching, IndexedDB for local data (planned)
+- **Testing**: Vitest + React Testing Library
 
-## Contributing Context
+See `docs/architecture.md` for system design details and schema overview.
 
-This is a collaborative open-source project. The main repo is `r0droald/LUaid`. We work on forks and submit PRs for review.
+## Contributing
 
-- `origin` → personal fork (Jaskey15/LUaid)
-- `upstream` → main repo (r0droald/LUaid)
-- Feature branches: `feat/<name>`, `fix/<name>`
-- PRs go from fork branches → upstream main
+Main repo: `r0droald/LUaid`. Feature branches (`feat/<name>`, `fix/<name>`) → PR to `main`.
+
+See `docs/setup.md` for local development setup.
 
 ## Key Constraints
 
@@ -27,35 +27,25 @@ This is a collaborative open-source project. The main repo is `r0droald/LUaid`. 
 - **Offline-first**: Everything must work without internet. Cache aggressively, sync when online.
 - **Non-technical users**: Volunteers, writers, and relief coordinators use this. Keep UX simple.
 - **Multilingual**: Must support English, Filipino, and Ilocano at minimum.
+- **Minimal dependencies**: Every dependency is a liability in disaster scenarios.
 
 ## Code Conventions
 
-- TypeScript (strict mode) — all source, test, and config files use `.ts`/`.tsx`
+- TypeScript strict mode — all source, test, and config files use `.ts`/`.tsx`
 - App Router (not Pages Router)
 - Tailwind CSS for styling
-- Components in `src/components/`
-- Keep dependencies minimal — every dependency is a liability in disaster scenarios
+- Server components for data fetching (keys stay server-side)
+- Components in `src/components/`, query functions in `src/lib/queries.ts`
 
 ## Commands
 
 ```bash
-# Dev server (Turbopack — no service worker in dev)
-npm run dev
-
-# Production build (webpack — generates service worker)
-npm run build
-
-# Start production server
-npm run start
-
-# Lint
-npm run lint
-
-# Run tests (once)
-npm test
-
-# Run tests (watch mode)
-npm run test:watch
+npm run dev          # Dev server (Turbopack — no service worker)
+npm run build        # Production build (webpack — generates service worker)
+npm run start        # Start production server
+npm run lint         # ESLint
+npm test             # Run tests (Vitest, once)
+npm run test:watch   # Run tests (watch mode)
 ```
 
 ## Project Structure
@@ -63,26 +53,34 @@ npm run test:watch
 ```
 src/
   app/
-    [locale]/       # Locale-based routing (en, fil, ilo)
-      layout.tsx    # Root layout with NextIntlClientProvider
-      page.tsx      # Homepage
-      ~offline/     # Offline fallback page (Serwist)
-    globals.css     # Global styles (Tailwind)
-    sw.ts           # Service worker source (Serwist)
-  components/       # Reusable UI components
-  hooks/            # Custom React hooks
-  lib/              # Utilities, API clients, helpers
+    [locale]/         # Locale-based routing (en, fil, ilo)
+      layout.tsx      # Root layout with NextIntlClientProvider
+      page.tsx        # Homepage
+      ~offline/       # Offline fallback page (Serwist)
+    globals.css       # Global styles (Tailwind)
+    sw.ts             # Service worker source (Serwist)
+  components/         # Reusable UI components
+  hooks/              # Custom React hooks
+  lib/
+    supabase.ts       # Server-side Supabase client
+    queries.ts        # Typed query functions for dashboard sections
   i18n/
-    routing.ts      # Locale definitions
-    request.ts      # Server-side i18n config
-    types.ts        # next-intl AppConfig type augmentation
-  middleware.ts     # Locale detection/redirect
-messages/           # Translation files (en.json, fil.json, ilo.json)
+    routing.ts        # Locale definitions
+    request.ts        # Server-side i18n config
+    types.ts          # next-intl AppConfig type augmentation
+  middleware.ts       # Locale detection/redirect
+supabase/
+  schema.sql          # Database schema (5 tables)
+  seed-kml.ts         # KML parser → Supabase seed script
+data/                 # Real relief operation data (KML exports)
+messages/             # Translation files (en.json, fil.json, ilo.json)
+docs/                 # Architecture, setup guide, plans
 public/
-  manifest.json     # PWA manifest
-  icons/            # PWA icons
+  manifest.json       # PWA manifest
+  icons/              # PWA icons
 ```
 
-## Open Issues Tracking
+## Lessons Learned
 
-See the GitHub Issues on the main repo for the current backlog. MVP milestone covers: scaffold (#8), dashboard (#9), offline sync (#10), maps (#7), forms (#11), CMS (#13), multilanguage (#12).
+- `Problem:` Supabase JS client returns nested relations as `unknown` types → `Rule:` Cast join results explicitly (e.g., `row.organizations as unknown as { name: string }`) in query functions
+- `Problem:` Serwist only generates service worker on webpack builds → `Rule:` Use `npm run build` (not dev server) to test offline behavior
