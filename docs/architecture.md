@@ -90,12 +90,12 @@ Locale-based routing via `next-intl`: `/en/`, `/fil/`, `/ilo/`. Translation file
 - Supabase schema, client, and query functions
 - KML seed script with real Typhoon Emong data
 - Vitest testing framework
+- Transparency dashboard (#9) — 7 components (Header, SummaryCards, DonationsByOrg, DeploymentHubs, GoodsByCategory, AidDistributionMap, StatusFooter) consuming query functions via async server component, dark navy theme with responsive grid, i18n keys in all 3 locales
 
 **Planned (see GitHub Issues):**
-- Dashboard UI (#9) — frontend consuming the query functions
 - Offline sync (#10) — IndexedDB caching + background sync
 - Data entry forms (#11) — replace Supabase table editor
-- Map visualization (#7) — Leaflet rendering of deployment coordinates
+- Map visualization (#7) — interactive Leaflet map (static AidDistributionMap placeholder exists)
 - Barangay triage (#15) — status board for prioritizing aid
 - CMS integration (#13) — WordPress content via REST API
 - Supabase Auth + RLS — add when user-facing forms are built
