@@ -9,7 +9,7 @@ LUaid.org is an open-source Progressive Web App for disaster relief operations i
 - **Frontend**: Next.js (App Router) + TypeScript (strict mode), hosted on Vercel
 - **Database**: Supabase (Postgres) — server-side only via service role key, never exposed to browser
 - **CMS**: WordPress backend at cms.LUaid.org (REST API for content)
-- **Maps**: Leaflet + OpenStreetMap (planned — Issue #7)
+- **Maps**: Leaflet + OpenStreetMap (static placeholder exists; interactive map planned — Issue #7)
 - **PWA**: Serwist service worker for offline caching, IndexedDB for local data (planned)
 - **Testing**: Vitest + React Testing Library
 
@@ -55,11 +55,11 @@ src/
   app/
     [locale]/         # Locale-based routing (en, fil, ilo)
       layout.tsx      # Root layout with NextIntlClientProvider
-      page.tsx        # Homepage
+      page.tsx        # Transparency dashboard (async server component)
       ~offline/       # Offline fallback page (Serwist)
     globals.css       # Global styles (Tailwind)
     sw.ts             # Service worker source (Serwist)
-  components/         # Reusable UI components
+  components/         # Dashboard UI (Header, SummaryCards, DonationsByOrg, DeploymentHubs, GoodsByCategory, AidDistributionMap, StatusFooter)
   hooks/              # Custom React hooks
   lib/
     supabase.ts       # Server-side Supabase client
