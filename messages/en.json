@@ -1,0 +1,11 @@
+{
+  "App": {
+    "title": "LUaid.org",
+    "description": "Disaster Relief Transparency"
+  },
+  "Navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "volunteer": "Volunteer"
+  }
+}
