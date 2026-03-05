@@ -1,0 +1,69 @@
+-- LUaid.org — Supabase Schema
+-- Run this in the Supabase SQL Editor to create all tables.
+
+-- Organizations: donors, deployment hubs, or both
+CREATE TABLE organizations (
+  id           uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name         text NOT NULL,
+  type         text NOT NULL CHECK (type IN ('donor', 'hub', 'both')),
+  municipality text,
+  lat          decimal(9,6),
+  lng          decimal(9,6),
+  created_at   timestamptz DEFAULT now()
+);
+
+-- Aid categories: broad groupings for dashboard rollups
+CREATE TABLE aid_categories (
+  id   uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name text NOT NULL UNIQUE,
+  icon text
+);
+
+-- Barangays: geographic aggregation layer
+CREATE TABLE barangays (
+  id           uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name         text NOT NULL,
+  municipality text NOT NULL,
+  lat          decimal(9,6),
+  lng          decimal(9,6),
+  population   integer,
+  created_at   timestamptz DEFAULT now()
+);
+
+-- Donations: monetary contributions
+CREATE TABLE donations (
+  id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id uuid NOT NULL REFERENCES organizations(id),
+  amount          decimal(12,2) NOT NULL,
+  date            date NOT NULL,
+  notes           text,
+  created_at      timestamptz DEFAULT now()
+);
+
+-- Deployments: every aid delivery event (core table)
+CREATE TABLE deployments (
+  id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  organization_id uuid NOT NULL REFERENCES organizations(id),
+  aid_category_id uuid NOT NULL REFERENCES aid_categories(id),
+  barangay_id     uuid REFERENCES barangays(id),
+  quantity        integer,
+  unit            text,
+  recipient       text,
+  lat             decimal(9,6),
+  lng             decimal(9,6),
+  date            date,
+  volunteer_count integer,
+  hours           decimal(5,1),
+  notes           text,
+  created_at      timestamptz DEFAULT now()
+);
+
+-- Seed aid categories
+INSERT INTO aid_categories (name, icon) VALUES
+  ('Water Filtration', 'droplet'),
+  ('Meals', 'utensils'),
+  ('Relief Goods', 'package'),
+  ('Construction Materials', 'hammer'),
+  ('Cleaning Supplies', 'sparkles'),
+  ('Drinking Water', 'glass-water'),
+  ('Kiddie Packs', 'baby');
