@@ -1,0 +1,123 @@
+import { supabase } from "./supabase";
+
+export async function getTotalDonations() {
+  const { data, error } = await supabase
+    .from("donations")
+    .select("amount");
+
+  if (error) throw error;
+  return data.reduce((sum, row) => sum + Number(row.amount), 0);
+}
+
+export async function getTotalBeneficiaries() {
+  const { data, error } = await supabase
+    .from("deployments")
+    .select("quantity");
+
+  if (error) throw error;
+  return data.reduce((sum, row) => sum + (row.quantity ?? 0), 0);
+}
+
+export async function getVolunteerCount() {
+  const { data, error } = await supabase
+    .from("deployments")
+    .select("volunteer_count");
+
+  if (error) throw error;
+  return data.reduce((sum, row) => sum + (row.volunteer_count ?? 0), 0);
+}
+
+export async function getDonationsByOrganization() {
+  const { data, error } = await supabase
+    .from("donations")
+    .select("amount, organizations(name)");
+
+  if (error) throw error;
+
+  const grouped = data.reduce<Record<string, number>>((acc, row) => {
+    const name = (row.organizations as unknown as { name: string })?.name ?? "Unknown";
+    acc[name] = (acc[name] ?? 0) + Number(row.amount);
+    return acc;
+  }, {});
+
+  return Object.entries(grouped)
+    .map(([name, amount]) => ({ name, amount }))
+    .sort((a, b) => b.amount - a.amount);
+}
+
+export async function getDeploymentHubs() {
+  const { data, error } = await supabase
+    .from("deployments")
+    .select("organization_id, organizations(name, municipality)");
+
+  if (error) throw error;
+
+  const grouped = data.reduce<
+    Record<string, { name: string; municipality: string; count: number }>
+  >((acc, row) => {
+    const org = row.organizations as unknown as { name: string; municipality: string };
+    const id = row.organization_id;
+    if (!acc[id]) {
+      acc[id] = { name: org?.name ?? "Unknown", municipality: org?.municipality ?? "", count: 0 };
+    }
+    acc[id].count++;
+    return acc;
+  }, {});
+
+  return Object.values(grouped).sort((a, b) => b.count - a.count);
+}
+
+export async function getGoodsByCategory() {
+  const { data, error } = await supabase
+    .from("deployments")
+    .select("quantity, aid_categories(name, icon)");
+
+  if (error) throw error;
+
+  const grouped = data.reduce<
+    Record<string, { name: string; icon: string | null; total: number }>
+  >((acc, row) => {
+    const cat = row.aid_categories as unknown as { name: string; icon: string | null };
+    const name = cat?.name ?? "Unknown";
+    if (!acc[name]) {
+      acc[name] = { name, icon: cat?.icon ?? null, total: 0 };
+    }
+    acc[name].total += row.quantity ?? 0;
+    return acc;
+  }, {});
+
+  return Object.values(grouped).sort((a, b) => b.total - a.total);
+}
+
+export async function getDeploymentMapPoints() {
+  const { data, error } = await supabase
+    .from("deployments")
+    .select("lat, lng, quantity, unit, organizations(name), aid_categories(name)")
+    .not("lat", "is", null);
+
+  if (error) throw error;
+  return data;
+}
+
+export async function getBeneficiariesByBarangay() {
+  const { data, error } = await supabase
+    .from("deployments")
+    .select("quantity, barangays(name, municipality)")
+    .not("barangay_id", "is", null);
+
+  if (error) throw error;
+
+  const grouped = data.reduce<
+    Record<string, { name: string; municipality: string; beneficiaries: number }>
+  >((acc, row) => {
+    const brgy = row.barangays as unknown as { name: string; municipality: string };
+    const key = brgy?.name ?? "Unknown";
+    if (!acc[key]) {
+      acc[key] = { name: brgy?.name ?? "Unknown", municipality: brgy?.municipality ?? "", beneficiaries: 0 };
+    }
+    acc[key].beneficiaries += row.quantity ?? 0;
+    return acc;
+  }, {});
+
+  return Object.values(grouped).sort((a, b) => b.beneficiaries - a.beneficiaries);
+}
