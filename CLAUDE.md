@@ -6,7 +6,7 @@ LUaid.org is an open-source Progressive Web App for disaster relief operations i
 
 ## Architecture
 
-- **Frontend**: Next.js (App Router) + JavaScript (with JSDoc), hosted on Vercel
+- **Frontend**: Next.js (App Router) + TypeScript (strict mode), hosted on Vercel
 - **Database**: Supabase (Postgres + Auth + Realtime + Storage) — proposed, pending team approval; current prototype uses Google Sheets
 - **CMS**: WordPress backend at cms.LUaid.org (REST API for content)
 - **Maps**: Leaflet + OpenStreetMap — proposed, pending team approval
@@ -30,7 +30,7 @@ This is a collaborative open-source project. The main repo is `r0droald/LUaid`. 
 
 ## Code Conventions
 
-- JavaScript with JSDoc type hints (chosen for contributor accessibility; TypeScript migration possible later)
+- TypeScript (strict mode) — all source, test, and config files use `.ts`/`.tsx`
 - App Router (not Pages Router)
 - Tailwind CSS for styling
 - Components in `src/components/`
@@ -64,18 +64,19 @@ npm run test:watch
 src/
   app/
     [locale]/       # Locale-based routing (en, fil, ilo)
-      layout.js     # Root layout with NextIntlClientProvider
-      page.js       # Homepage
+      layout.tsx    # Root layout with NextIntlClientProvider
+      page.tsx      # Homepage
       ~offline/     # Offline fallback page (Serwist)
     globals.css     # Global styles (Tailwind)
-    sw.js           # Service worker source (Serwist)
+    sw.ts           # Service worker source (Serwist)
   components/       # Reusable UI components
   hooks/            # Custom React hooks
   lib/              # Utilities, API clients, helpers
   i18n/
-    routing.js      # Locale definitions
-    request.js      # Server-side i18n config
-  middleware.js     # Locale detection/redirect
+    routing.ts      # Locale definitions
+    request.ts      # Server-side i18n config
+    types.ts        # next-intl AppConfig type augmentation
+  middleware.ts     # Locale detection/redirect
 messages/           # Translation files (en.json, fil.json, ilo.json)
 public/
   manifest.json     # PWA manifest
