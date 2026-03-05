@@ -1,0 +1,24 @@
+import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import DonationsByOrg from "@/components/DonationsByOrg";
+
+describe("DonationsByOrg", () => {
+  it("renders organization names and amounts", () => {
+    render(
+      <DonationsByOrg
+        donations={[
+          { name: "Waves4Water", amount: 500000 },
+          { name: "Citizens for LU", amount: 300000 },
+        ]}
+      />
+    );
+    expect(screen.getByText("Waves4Water")).toBeInTheDocument();
+    expect(screen.getByText("₱500,000")).toBeInTheDocument();
+    expect(screen.getByText("Citizens for LU")).toBeInTheDocument();
+  });
+
+  it("renders empty state gracefully", () => {
+    const { container } = render(<DonationsByOrg donations={[]} />);
+    expect(container).toBeTruthy();
+  });
+});
