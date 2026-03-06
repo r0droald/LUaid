@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///Users/jacobaskey/Development/LUaid/src/app/%5Blocale%5D/page.tsx"],"sourcesContent":["import { useTranslations } from \"next-intl\";\n\nexport default function HomePage() {\n  const t = useTranslations(\"App\");\n\n  return (\n    <main className=\"flex min-h-screen flex-col items-center justify-center\">\n      <h1 className=\"text-4xl font-bold\">{t(\"title\")}</h1>\n      <p className=\"mt-4 text-lg text-gray-400\">{t(\"description\")}</p>\n    </main>\n  );\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,MAAM,IAAI,IAAA,iQAAe,EAAC;IAE1B,qBACE,8OAAC;QAAK,WAAU;;0BACd,8OAAC;gBAAG,WAAU;0BAAsB,EAAE;;;;;;0BACtC,8OAAC;gBAAE,WAAU;0BAA8B,EAAE;;;;;;;;;;;;AAGnD"}}]
+}

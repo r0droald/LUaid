@@ -1,0 +1,1 @@
+"use strict";exports.id=998,exports.ids=[998],exports.modules={5998:a=>{a.exports=JSON.parse('{"App":{"title":"LUaid.org","description":"Transparency sa Disaster Relief"},"Navigation":{"home":"Tahanan","dashboard":"Dashboard","volunteer":"Boluntaryo"}}')}};

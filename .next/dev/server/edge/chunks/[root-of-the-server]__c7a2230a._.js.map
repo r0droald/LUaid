@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 16, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/i18n/routing.ts"],"sourcesContent":["import { defineRouting } from \"next-intl/routing\";\n\nexport const routing = defineRouting({\n  locales: [\"en\", \"fil\", \"ilo\"],\n  defaultLocale: \"en\",\n});\n"],"names":[],"mappings":";;;;AAAA;;AAEO,MAAM,UAAU,IAAA,2PAAa,EAAC;IACnC,SAAS;QAAC;QAAM;QAAO;KAAM;IAC7B,eAAe;AACjB"}},
+    {"offset": {"line": 34, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/middleware.ts"],"sourcesContent":["import createMiddleware from \"next-intl/middleware\";\nimport { routing } from \"./i18n/routing\";\n\nexport default createMiddleware(routing);\n\nexport const config = {\n  matcher: \"/((?!api|trpc|_next|_vercel|.*\\\\..*).*)\",\n};\n"],"names":[],"mappings":";;;;;;AAAA;AACA;;;uCAEe,IAAA,yMAAgB,EAAC,yIAAO;AAEhC,MAAM,SAAS;IACpB,SAAS;AACX"}}]
+}

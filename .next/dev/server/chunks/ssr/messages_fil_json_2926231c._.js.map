@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/messages/fil.json"],"sourcesContent":["{\"App\":{\"title\":\"LUaid.org\",\"description\":\"Transparency sa Disaster Relief\"},\"Navigation\":{\"home\":\"Tahanan\",\"dashboard\":\"Dashboard\",\"volunteer\":\"Boluntaryo\"}}"],"names":[],"mappings":"AAAA"}},
+    {"offset": {"line": 3, "column": 184}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}
