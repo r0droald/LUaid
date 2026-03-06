@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 type Props = {
   donations: { name: string; amount: number }[];
 };
@@ -14,12 +16,13 @@ const BAR_COLORS = [
 ];
 
 export default function DonationsByOrg({ donations }: Props) {
+  const { t } = useTranslation();
   const total = donations.reduce((sum, d) => sum + d.amount, 0);
 
   return (
     <div className="rounded-xl border border-neutral-400/20 bg-secondary p-6">
       <h3 className="mb-4 text-lg font-semibold text-neutral-50">
-        Donations Received per Organization
+        {t("Dashboard.donationsByOrg")}
       </h3>
       <div className="space-y-4">
         {donations.map((org, i) => {

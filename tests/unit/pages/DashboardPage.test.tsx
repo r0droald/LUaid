@@ -13,12 +13,19 @@ vi.mock("@/lib/queries", () => ({
   getBeneficiariesByBarangay: vi.fn(),
 }));
 
-// Mock react-i18next (Header uses it)
+// Mock react-i18next
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
     i18n: { changeLanguage: vi.fn() },
   }),
+  initReactI18next: { type: "3rdParty", init: () => {} },
+}));
+
+// Mock react-router (Header uses useParams/useNavigate)
+vi.mock("react-router", () => ({
+  useParams: () => ({ locale: "en" }),
+  useNavigate: () => vi.fn(),
 }));
 
 import {
@@ -58,7 +65,7 @@ describe("DashboardPage", () => {
 
   it("shows loading state initially", () => {
     render(<DashboardPage />);
-    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+    expect(screen.getByText("Dashboard.loading")).toBeInTheDocument();
   });
 
   it("renders dashboard components after data loads", async () => {
@@ -86,7 +93,7 @@ describe("DashboardPage", () => {
     expect(screen.getByText(/Catbangen/)).toBeInTheDocument();
 
     // StatusFooter
-    expect(screen.getByText("Online")).toBeInTheDocument();
+    expect(screen.getByText("Dashboard.online")).toBeInTheDocument();
   });
 
   it("renders error state with retry button on fetch failure", async () => {
@@ -95,9 +102,9 @@ describe("DashboardPage", () => {
     render(<DashboardPage />);
 
     await waitFor(() => {
-      expect(screen.getByText(/failed to load/i)).toBeInTheDocument();
+      expect(screen.getByText("Dashboard.loadError")).toBeInTheDocument();
     });
 
-    expect(screen.getByRole("button", { name: /retry/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Dashboard.retry" })).toBeInTheDocument();
   });
 });
