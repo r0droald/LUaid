@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import { RootLayout } from "./components/RootLayout";
-import { HomePage } from "./pages/HomePage";
+import { DashboardPage } from "./pages/DashboardPage";
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
     path: "/:locale",
     element: <RootLayout />,
     children: [
-      { index: true, element: <HomePage /> },
+      { index: true, element: <DashboardPage /> },
     ],
   },
 ]);

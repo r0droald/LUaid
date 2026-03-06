@@ -71,13 +71,14 @@ src/
     maps/             # Map components (planned)
     shared/           # Shared UI components (planned)
   pages/
-    HomePage.tsx      # Landing page
+    DashboardPage.tsx # Live dashboard (index route)
   hooks/              # Custom React hooks
   lib/
     supabase.ts       # Supabase client (anon key via import.meta.env)
     queries.ts        # Typed query functions for dashboard sections
 supabase/
   schema.sql          # Database schema (5 tables)
+  rls-policies.sql    # Row-level security policies (anon read)
   seed-kml.ts         # KML parser → Supabase seed script
 data/                 # Real relief operation data (KML exports)
 public/
