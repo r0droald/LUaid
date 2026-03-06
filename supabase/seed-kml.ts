@@ -5,7 +5,7 @@
  * real deployment data into Supabase.
  *
  * Usage:
- *   npx tsx supabase/seed-kml.ts <path-to-kml-file>
+ *   npx tsx supabase/seed-kml.ts data/Emong_relief_operations.kml
  *
  * Requires SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local
  */

@@ -39,8 +39,5 @@ yarn-error.log*
 # git worktrees
 .worktrees/
 
-# local data files (KML exports, etc.)
-/data
-
 # typescript
 *.tsbuildinfo
