@@ -1,9 +1,7 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
-  const t = useTranslations("Navigation");
+  const { t } = useTranslation();
 
   return (
     <header className="border-b border-gray-800 bg-navy-950">
@@ -15,7 +13,7 @@ export default function Header() {
             href="#"
             className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-500"
           >
-            {t("volunteer")}
+            {t("Navigation.volunteer")}
           </a>
         </div>
       </div>
