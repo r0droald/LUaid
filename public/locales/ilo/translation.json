@@ -1,0 +1,27 @@
+{
+  "App": {
+    "title": "LUaid.org",
+    "description": "Transparency ti Disaster Relief"
+  },
+  "Navigation": {
+    "home": "Pagtaengan",
+    "dashboard": "Dashboard",
+    "volunteer": "Boluntario"
+  },
+  "Dashboard": {
+    "hero": "Disaster Relief Transparency",
+    "subtitle": "Real-time tracking of humanitarian aid distribution",
+    "totalDonations": "Total Donations",
+    "totalBeneficiaries": "Total Beneficiaries",
+    "volunteerCount": "Volunteer Count",
+    "donationsByOrg": "Donations Received per Organization",
+    "deploymentHubs": "Deployment Hubs",
+    "goodsPurchased": "Goods Purchased",
+    "aidDistributionMap": "Aid Distribution Map",
+    "liveMap": "Live Map",
+    "deployments": "deployments",
+    "beneficiaries": "beneficiaries",
+    "online": "Online",
+    "lastUpdated": "Last Updated"
+  }
+}
