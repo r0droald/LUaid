@@ -10,7 +10,6 @@ vi.mock("@/lib/queries", () => ({
   getDonationsByOrganization: vi.fn(),
   getDeploymentHubs: vi.fn(),
   getGoodsByCategory: vi.fn(),
-  getDeploymentMapPoints: vi.fn(),
   getBeneficiariesByBarangay: vi.fn(),
 }));
 
@@ -29,7 +28,6 @@ import {
   getDonationsByOrganization,
   getDeploymentHubs,
   getGoodsByCategory,
-  getDeploymentMapPoints,
   getBeneficiariesByBarangay,
 } from "@/lib/queries";
 
@@ -47,7 +45,6 @@ const mockQueries = () => {
   vi.mocked(getGoodsByCategory).mockResolvedValue([
     { name: "Meals", icon: null, total: 800 },
   ]);
-  vi.mocked(getDeploymentMapPoints).mockResolvedValue([]);
   vi.mocked(getBeneficiariesByBarangay).mockResolvedValue([
     { name: "Catbangen", municipality: "San Fernando", beneficiaries: 400 },
   ]);
