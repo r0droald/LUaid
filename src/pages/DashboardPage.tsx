@@ -102,20 +102,33 @@ export function DashboardPage() {
     );
   }
 
+  const totalDeployments = data.deploymentHubs.reduce((sum, h) => sum + h.count, 0);
+
   return (
     <div className="min-h-screen bg-base">
       <Header />
       <main className="mx-auto max-w-7xl space-y-6 px-6 py-8">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-neutral-50">
+            {t("Dashboard.hero")}
+          </h1>
+          <p className="mt-1 text-sm text-neutral-400">
+            {t("Dashboard.subtitle")}
+          </p>
+        </div>
         <SummaryCards
           totalDonations={data.totalDonations}
           totalBeneficiaries={data.totalBeneficiaries}
           volunteerCount={data.volunteerCount}
+          orgCount={data.donationsByOrg.length}
+          locationCount={data.barangays.length}
+          deploymentCount={totalDeployments}
         />
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <DonationsByOrg donations={data.donationsByOrg} />
           <DeploymentHubs hubs={data.deploymentHubs} />
+          <GoodsByCategory categories={data.goodsByCategory} />
         </div>
-        <GoodsByCategory categories={data.goodsByCategory} />
         <AidDistributionMap barangays={data.barangays} deploymentPoints={data.deploymentPoints} />
       </main>
       <StatusFooter />

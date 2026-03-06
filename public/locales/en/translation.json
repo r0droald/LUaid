@@ -28,6 +28,9 @@
     "lastUpdated": "Last Updated",
     "loading": "Loading dashboard\u2026",
     "loadError": "Failed to load dashboard data",
-    "retry": "Retry"
+    "retry": "Retry",
+    "organizationCount": "{{count}} organizations",
+    "locationsServed": "{{count}} locations served",
+    "acrossDeployments": "across {{count}} deployments"
   }
 }
