@@ -4,23 +4,23 @@ type Props = {
 
 export default function AidDistributionMap({ barangays }: Props) {
   return (
-    <div className="rounded-xl border border-gray-700/50 bg-navy-900 p-6">
+    <div className="rounded-xl border border-neutral-400/20 bg-secondary p-6">
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-white">
+        <h3 className="text-lg font-semibold text-neutral-50">
           Aid Distribution Map
         </h3>
-        <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-medium text-red-400">
+        <span className="rounded-full bg-error/20 px-3 py-1 text-xs font-medium text-error">
           Live Map
         </span>
       </div>
 
-      <div className="mb-6 flex h-48 items-center justify-center rounded-lg bg-gray-800/30">
-        <p className="text-sm text-gray-500">
+      <div className="mb-6 flex h-48 items-center justify-center rounded-lg bg-base/30">
+        <p className="text-sm text-neutral-400/60">
           Interactive map coming soon
         </p>
       </div>
 
-      <div className="divide-y divide-gray-700/50">
+      <div className="divide-y divide-neutral-400/20">
         {barangays.map((brgy) => (
           <div
             key={`${brgy.name}-${brgy.municipality}`}
@@ -28,7 +28,7 @@ export default function AidDistributionMap({ barangays }: Props) {
           >
             <div className="flex items-center gap-3">
               <svg
-                className="h-5 w-5 shrink-0 text-red-400"
+                className="h-5 w-5 shrink-0 text-error"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -38,15 +38,15 @@ export default function AidDistributionMap({ barangays }: Props) {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="text-gray-300">
+              <span className="text-neutral-400">
                 Barangay {brgy.name}, {brgy.municipality}
               </span>
             </div>
             <div className="text-right">
-              <span className="font-bold text-red-400">
+              <span className="font-bold text-error">
                 {brgy.beneficiaries.toLocaleString()}
               </span>
-              <span className="ml-1 text-xs text-gray-500">beneficiaries</span>
+              <span className="ml-1 text-xs text-neutral-400/60">beneficiaries</span>
             </div>
           </div>
         ))}

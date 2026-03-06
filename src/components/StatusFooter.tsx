@@ -7,9 +7,9 @@ export default function StatusFooter() {
   });
 
   return (
-    <footer className="mt-6 flex items-center gap-6 rounded-xl border-t border-gray-700/50 bg-navy-900 px-6 py-4 text-sm text-gray-400">
+    <footer className="mt-6 flex items-center gap-6 rounded-xl border-t border-neutral-400/20 bg-secondary px-6 py-4 text-sm text-neutral-400">
       <span className="flex items-center gap-2">
-        <span className="h-2 w-2 rounded-full bg-emerald-400" />
+        <span className="h-2 w-2 rounded-full bg-success" />
         Online
       </span>
       <span className="flex items-center gap-2">

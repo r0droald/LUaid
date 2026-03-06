@@ -76,7 +76,7 @@ export function DashboardPage() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-gray-400">Loading dashboard…</p>
+        <p className="text-neutral-400">Loading dashboard…</p>
       </div>
     );
   }
@@ -84,10 +84,10 @@ export function DashboardPage() {
   if (error || !data) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4">
-        <p className="text-red-400">Failed to load dashboard data</p>
+        <p className="text-error">Failed to load dashboard data</p>
         <button
           onClick={fetchData}
-          className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-500"
+          className="rounded-lg bg-primary px-4 py-2 text-sm text-white hover:bg-primary/80"
         >
           Retry
         </button>
@@ -96,7 +96,7 @@ export function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-navy-950">
+    <div className="min-h-screen bg-base">
       <Header />
       <main className="mx-auto max-w-7xl space-y-6 px-6 py-8">
         <SummaryCards
