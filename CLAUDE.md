@@ -38,6 +38,16 @@ See `docs/setup.md` for local development setup.
 - Components in `src/components/`, pages in `src/pages/`, query functions in `src/lib/queries.ts`
 - Environment variables use `VITE_` prefix via `import.meta.env`
 
+## Design System
+
+All UI uses semantic design tokens defined in `src/index.css` via Tailwind v4 `@theme`. **Never use arbitrary Tailwind colors** (e.g., `bg-blue-500`) — use tokens instead (e.g., `bg-primary`).
+
+- **Font**: Inter Variable loaded locally via `@fontsource-variable/inter` (offline-first)
+- **Theme**: Single dark theme — dark base background with charcoal card surfaces
+- **Tokens**: `primary`, `secondary`, `accent`, `success`, `warning`, `error`, `neutral-{50,100,400}`, `base`
+
+See `docs/design-system.md` for the full token reference and component styling patterns.
+
 ## Commands
 
 ```bash
