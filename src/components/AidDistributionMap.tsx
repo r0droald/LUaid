@@ -1,22 +1,26 @@
+import { useTranslation } from "react-i18next";
+
 type Props = {
   barangays: { name: string; municipality: string; beneficiaries: number }[];
 };
 
 export default function AidDistributionMap({ barangays }: Props) {
+  const { t } = useTranslation();
+
   return (
     <div className="rounded-xl border border-neutral-400/20 bg-secondary p-6">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-lg font-semibold text-neutral-50">
-          Aid Distribution Map
+          {t("Dashboard.aidDistributionMap")}
         </h3>
         <span className="rounded-full bg-error/20 px-3 py-1 text-xs font-medium text-error">
-          Live Map
+          {t("Dashboard.liveMap")}
         </span>
       </div>
 
       <div className="mb-6 flex h-48 items-center justify-center rounded-lg bg-base/30">
         <p className="text-sm text-neutral-400/60">
-          Interactive map coming soon
+          {t("Dashboard.mapPlaceholder")}
         </p>
       </div>
 
@@ -39,14 +43,14 @@ export default function AidDistributionMap({ barangays }: Props) {
                 />
               </svg>
               <span className="text-neutral-400">
-                Barangay {brgy.name}, {brgy.municipality}
+                {t("Dashboard.barangayPrefix")} {brgy.name}, {brgy.municipality}
               </span>
             </div>
             <div className="text-right">
               <span className="font-bold text-error">
                 {brgy.beneficiaries.toLocaleString()}
               </span>
-              <span className="ml-1 text-xs text-neutral-400/60">beneficiaries</span>
+              <span className="ml-1 text-xs text-neutral-400/60">{t("Dashboard.beneficiaries")}</span>
             </div>
           </div>
         ))}

@@ -1,11 +1,18 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import StatusFooter from "@/components/StatusFooter";
+
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: { changeLanguage: vi.fn() },
+  }),
+}));
 
 describe("StatusFooter", () => {
   it("renders online status and timestamp", () => {
     render(<StatusFooter />);
-    expect(screen.getByText("Online")).toBeInTheDocument();
-    expect(screen.getByText(/Last Updated/)).toBeInTheDocument();
+    expect(screen.getByText("Dashboard.online")).toBeInTheDocument();
+    expect(screen.getByText(/Dashboard\.lastUpdated/)).toBeInTheDocument();
   });
 });
