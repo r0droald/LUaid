@@ -17,7 +17,7 @@ Defined in `src/index.css` via Tailwind v4 `@theme inline`. Use semantic class n
 | `primary` | `#1976D2` | `bg-primary`, `text-primary` | Buttons, links, navigation highlights |
 | `secondary` | `#263238` | `bg-secondary` | Card backgrounds |
 | `accent` | `#FFC107` | `bg-accent`, `text-accent` | Highlights, status indicators |
-| `success` | `#388E3C` | `bg-success`, `text-success` | Positive values, online status, monetary amounts |
+| `success` | `#388E3C` | `bg-success`, `text-success` | Positive values, online status, monetary amounts, live indicators |
 | `warning` | `#FFA000` | `bg-warning`, `text-warning` | Caution states |
 | `error` | `#D32F2F` | `bg-error`, `text-error` | Errors, map markers |
 | `neutral-50` | `#FFFFFF` | `text-neutral-50` | Primary text (headings, values) |
@@ -58,7 +58,8 @@ Use Tailwind's `/` opacity syntax for subtle variations:
 - `text-neutral-400/60` — de-emphasized secondary text (percentages, timestamps)
 - `border-neutral-400/20` — subtle card borders and dividers
 - `bg-base/30` — faint background tints
-- `bg-error/20` — light badge backgrounds
+- `bg-error/20` — light badge backgrounds (errors, alerts)
+- `bg-success/20` — light badge backgrounds (live status, positive indicators)
 
 ## Third-Party Overrides
 
