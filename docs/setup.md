@@ -15,13 +15,16 @@ npm install
 
 ## 2. Configure Environment
 
+Create a `.env.local` file in the project root with the shared Supabase credentials:
+
 ```bash
-cp .env.example .env.local
+cat <<'EOF' > .env.local
+VITE_SUPABASE_URL=https://koysnybrzdqiudguzxig.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtveXNueWJyemRxaXVkZ3V6eGlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3MzQyMjUsImV4cCI6MjA4ODMxMDIyNX0.9IKKDPHfQynAyrZAVV2S1JX6RhnfuBhiVO8oI86YWAU
+EOF
 ```
 
-The `.env.example` file already contains the project's Supabase credentials — no changes needed.
-
-> **Why are these credentials in the repo?** LUaid uses the Supabase **anon (public) key**, which is designed to be exposed. It ships to every user's browser in the built JavaScript bundle and is visible in network requests on the deployed site. Supabase's security model does not rely on this key being secret — all access control is enforced by [Row Level Security (RLS)](https://supabase.com/docs/guides/auth/row-level-security) policies on the database. Our RLS policies grant public **read-only** access to all tables (see `supabase/rls-policies.sql`).
+> **Is it safe to share these?** Yes. This is the Supabase **anon (public) key** — it is designed to be exposed. It ships to every user's browser in the built JavaScript bundle and is visible in network requests on the deployed site. Supabase's security model does not rely on this key being secret — all access control is enforced by [Row Level Security (RLS)](https://supabase.com/docs/guides/auth/row-level-security) policies on the database. Our RLS policies grant public **read-only** access to all tables (see `supabase/rls-policies.sql`).
 >
 > The **service role key** (which bypasses RLS) is never committed and is only needed for admin scripts like the KML seeder.
 
