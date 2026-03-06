@@ -1,8 +1,23 @@
-type Props = {
-  barangays: { name: string; municipality: string; beneficiaries: number }[];
+import DeploymentMap from "@/components/maps/DeploymentMap";
+
+type DeploymentPoint = {
+  lat: number;
+  lng: number;
+  quantity: number | null;
+  unit: string | null;
+  orgName: string;
+  categoryName: string;
 };
 
-export default function AidDistributionMap({ barangays }: Props) {
+type Props = {
+  barangays: { name: string; municipality: string; beneficiaries: number }[];
+  deploymentPoints: DeploymentPoint[];
+};
+
+export default function AidDistributionMap({
+  barangays,
+  deploymentPoints,
+}: Props) {
   return (
     <div className="rounded-xl border border-neutral-400/20 bg-secondary p-6">
       <div className="mb-4 flex items-center justify-between">
@@ -14,11 +29,17 @@ export default function AidDistributionMap({ barangays }: Props) {
         </span>
       </div>
 
-      <div className="mb-6 flex h-48 items-center justify-center rounded-lg bg-base/30">
-        <p className="text-sm text-neutral-400/60">
-          Interactive map coming soon
-        </p>
-      </div>
+      {deploymentPoints.length > 0 ? (
+        <div className="mb-6">
+          <DeploymentMap points={deploymentPoints} />
+        </div>
+      ) : (
+        <div className="mb-6 flex h-64 items-center justify-center rounded-lg bg-base/30">
+          <p className="text-sm text-neutral-400/60">
+            No deployment data available
+          </p>
+        </div>
+      )}
 
       <div className="divide-y divide-neutral-400/20">
         {barangays.map((brgy) => (
@@ -46,7 +67,9 @@ export default function AidDistributionMap({ barangays }: Props) {
               <span className="font-bold text-error">
                 {brgy.beneficiaries.toLocaleString()}
               </span>
-              <span className="ml-1 text-xs text-neutral-400/60">beneficiaries</span>
+              <span className="ml-1 text-xs text-neutral-400/60">
+                beneficiaries
+              </span>
             </div>
           </div>
         ))}
