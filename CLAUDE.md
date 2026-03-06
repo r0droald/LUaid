@@ -9,7 +9,7 @@ LUaid.org is an open-source Progressive Web App for disaster relief operations i
 - **Frontend**: Vite + React SPA with react-router v7, TypeScript (strict mode)
 - **Database**: Supabase (Postgres) — browser-side via anon key (RLS required)
 - **CMS**: WordPress backend at cms.LUaid.org (REST API for content)
-- **Maps**: Leaflet + OpenStreetMap (static placeholder exists; interactive map planned — Issue #7)
+- **Maps**: Leaflet + react-leaflet + OpenStreetMap (interactive deployment map on dashboard)
 - **PWA**: vite-plugin-pwa (Workbox GenerateSW) for offline caching
 - **i18n**: react-i18next with i18next-http-backend (loads from `public/locales/`)
 - **Testing**: Vitest + React Testing Library
@@ -71,7 +71,7 @@ src/
   router.tsx          # Client-side routes (react-router v7)
   components/
     RootLayout.tsx    # Locale-aware layout (syncs i18n + html lang)
-    Header.tsx        # Site header with navigation
+    Header.tsx        # Site header with navigation + language switcher
     SummaryCards.tsx   # Dashboard summary cards
     DonationsByOrg.tsx
     DeploymentHubs.tsx
@@ -80,7 +80,7 @@ src/
     StatusFooter.tsx
     dashboard/        # Dashboard-specific components (planned)
     forms/            # Form components (planned)
-    maps/             # Map components (planned)
+    maps/             # Map components (DeploymentMap.tsx)
     shared/           # Shared UI components (planned)
   pages/
     DashboardPage.tsx # Live dashboard (index route)

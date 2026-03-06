@@ -60,6 +60,14 @@ Use Tailwind's `/` opacity syntax for subtle variations:
 - `bg-base/30` — faint background tints
 - `bg-error/20` — light badge backgrounds
 
+## Third-Party Overrides
+
+| Selector | Override | Reason |
+|----------|----------|--------|
+| `.leaflet-popup-content-wrapper` | `color: var(--color-base)` | Leaflet popups default to dark text on white background — uses the `base` token so popup text stays on-brand |
+
+Leaflet CSS is imported globally in `src/index.css` via `@import "leaflet/dist/leaflet.css"`.
+
 ## Known Limitations
 
 - **Bar chart palette (Issue #32):** `DonationsByOrg` uses 5 semantic colors + 3 opacity variants. With 6+ organizations, the faded variants are hard to distinguish from the originals.

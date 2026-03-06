@@ -83,24 +83,25 @@ Real deployment data from Typhoon Emong relief operations is stored in `data/Emo
 
 ## Internationalization
 
-Locale-based routing via react-router URL params: `/:locale` (en, fil, ilo). Translation files in `public/locales/`. Client-side language detection via `i18next-browser-languagedetector` with path-based lookup. `RootLayout` component syncs the i18n language with the URL param.
+Locale-based routing via react-router URL params: `/:locale` (en, fil, ilo). Translation files in `public/locales/`. Client-side language detection via `i18next-browser-languagedetector` with path-based lookup. `RootLayout` component syncs the i18n language with the URL param. A language switcher dropdown in the Header lets users switch between English, Filipino, and Ilocano — navigating to the corresponding `/:locale` route.
 
 ## What's Built vs Planned
 
 **Built:**
 - Vite + React SPA with vite-plugin-pwa service worker
 - Client-side locale routing (en, fil, ilo) via react-router v7
-- Supabase schema, client, and query functions
+- Supabase schema, client, query functions, and RLS policies (anon read access)
 - KML seed script with real Typhoon Emong data
 - Vitest testing framework
+- Dashboard page with client-side data fetching wired to all components
 - 7 dashboard components (Header, SummaryCards, DonationsByOrg, DeploymentHubs, GoodsByCategory, AidDistributionMap, StatusFooter) with tests
+- i18n wired into all dashboard components — all user-facing strings use `t()` translation keys
+- Language switcher in Header (English / Filipino / Ilocano dropdown)
+- Interactive Leaflet map (`DeploymentMap`) with deployment markers, popups, and empty-state handling (#7)
 
 **Planned (see GitHub Issues):**
-- Dashboard route — wire existing components into a routed page with client-side data fetching
-- Supabase RLS policies — enable anon key read access to all tables
 - Offline sync (#10) — IndexedDB caching + background sync
 - Data entry forms (#11) — replace Supabase table editor
-- Map visualization (#7) — interactive Leaflet map (static AidDistributionMap placeholder exists)
 - Barangay triage (#15) — status board for prioritizing aid
 - CMS integration (#13) — WordPress content via REST API
 
