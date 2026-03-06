@@ -1,7 +1,0 @@
-{
-  "/_not-found/page": "/_not-found",
-  "/_global-error/page": "/_global-error",
-  "/favicon.ico/route": "/favicon.ico",
-  "/[locale]/page": "/[locale]",
-  "/[locale]/~offline/page": "/[locale]/~offline"
-}

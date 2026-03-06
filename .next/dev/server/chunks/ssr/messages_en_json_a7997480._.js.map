@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/messages/en.json"],"sourcesContent":["{\"App\":{\"title\":\"LUaid.org\",\"description\":\"Disaster Relief Transparency\"},\"Navigation\":{\"home\":\"Home\",\"dashboard\":\"Dashboard\",\"volunteer\":\"Volunteer\"}}"],"names":[],"mappings":"AAAA"}},
-    {"offset": {"line": 3, "column": 177}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

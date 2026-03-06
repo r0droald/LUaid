@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/messages/ilo.json"],"sourcesContent":["{\"App\":{\"title\":\"LUaid.org\",\"description\":\"Transparency ti Disaster Relief\"},\"Navigation\":{\"home\":\"Pagtaengan\",\"dashboard\":\"Dashboard\",\"volunteer\":\"Boluntario\"}}"],"names":[],"mappings":"AAAA"}},
-    {"offset": {"line": 3, "column": 187}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
