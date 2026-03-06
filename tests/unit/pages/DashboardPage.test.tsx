@@ -11,6 +11,11 @@ vi.mock("@/lib/queries", () => ({
   getDeploymentHubs: vi.fn(),
   getGoodsByCategory: vi.fn(),
   getBeneficiariesByBarangay: vi.fn(),
+  getDeploymentMapPoints: vi.fn(),
+}));
+
+vi.mock("@/components/maps/DeploymentMap", () => ({
+  default: () => <div data-testid="deployment-map" />,
 }));
 
 // Mock react-i18next
@@ -36,6 +41,7 @@ import {
   getDeploymentHubs,
   getGoodsByCategory,
   getBeneficiariesByBarangay,
+  getDeploymentMapPoints,
 } from "@/lib/queries";
 
 const mockQueries = () => {
@@ -54,6 +60,9 @@ const mockQueries = () => {
   ]);
   vi.mocked(getBeneficiariesByBarangay).mockResolvedValue([
     { name: "Catbangen", municipality: "San Fernando", beneficiaries: 400 },
+  ]);
+  vi.mocked(getDeploymentMapPoints).mockResolvedValue([
+    { lat: 16.62, lng: 120.35, quantity: 200, unit: "meals", orgName: "Red Cross", categoryName: "Meals" },
   ]);
 };
 

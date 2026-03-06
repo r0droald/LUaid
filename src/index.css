@@ -1,5 +1,6 @@
 @import "@fontsource-variable/inter";
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 @theme inline {
   --color-primary: #1976D2;
@@ -18,4 +19,8 @@ body {
   background: var(--color-base);
   color: var(--color-neutral-50);
   font-family: "Inter Variable", Inter, Arial, sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+  color: var(--color-base);
 }

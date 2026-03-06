@@ -15,6 +15,7 @@ import {
   getDeploymentHubs,
   getGoodsByCategory,
   getBeneficiariesByBarangay,
+  getDeploymentMapPoints,
 } from "@/lib/queries";
 
 type DashboardData = {
@@ -25,6 +26,7 @@ type DashboardData = {
   deploymentHubs: { name: string; municipality: string; count: number }[];
   goodsByCategory: { name: string; icon: string | null; total: number }[];
   barangays: { name: string; municipality: string; beneficiaries: number }[];
+  deploymentPoints: { lat: number; lng: number; quantity: number | null; unit: string | null; orgName: string; categoryName: string }[];
 };
 
 export function DashboardPage() {
@@ -45,6 +47,7 @@ export function DashboardPage() {
         deploymentHubs,
         goodsByCategory,
         barangays,
+        deploymentPoints,
       ] = await Promise.all([
         getTotalDonations(),
         getTotalBeneficiaries(),
@@ -53,6 +56,7 @@ export function DashboardPage() {
         getDeploymentHubs(),
         getGoodsByCategory(),
         getBeneficiariesByBarangay(),
+        getDeploymentMapPoints(),
       ]);
 
       setData({
@@ -63,6 +67,7 @@ export function DashboardPage() {
         deploymentHubs,
         goodsByCategory,
         barangays,
+        deploymentPoints,
       });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Failed to load dashboard data");
@@ -111,7 +116,7 @@ export function DashboardPage() {
           <DeploymentHubs hubs={data.deploymentHubs} />
         </div>
         <GoodsByCategory categories={data.goodsByCategory} />
-        <AidDistributionMap barangays={data.barangays} />
+        <AidDistributionMap barangays={data.barangays} deploymentPoints={data.deploymentPoints} />
       </main>
       <StatusFooter />
     </div>

@@ -93,10 +93,18 @@ export async function getDeploymentMapPoints() {
   const { data, error } = await supabase
     .from("deployments")
     .select("lat, lng, quantity, unit, organizations(name), aid_categories(name)")
-    .not("lat", "is", null);
+    .not("lat", "is", null)
+    .not("lng", "is", null);
 
   if (error) throw error;
-  return data;
+  return data.map((row) => ({
+    lat: Number(row.lat),
+    lng: Number(row.lng),
+    quantity: row.quantity,
+    unit: row.unit,
+    orgName: (row.organizations as unknown as { name: string })?.name ?? "Unknown",
+    categoryName: (row.aid_categories as unknown as { name: string })?.name ?? "Unknown",
+  }));
 }
 
 export async function getBeneficiariesByBarangay() {

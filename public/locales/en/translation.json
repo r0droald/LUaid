@@ -20,6 +20,7 @@
     "aidDistributionMap": "Aid Distribution Map",
     "liveMap": "Live Map",
     "mapPlaceholder": "Interactive map coming soon",
+    "noDeploymentData": "No deployment data available",
     "barangayPrefix": "Barangay",
     "deployments": "deployments",
     "beneficiaries": "beneficiaries",
