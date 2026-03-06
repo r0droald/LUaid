@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -13,11 +11,9 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
+/dist/
+/dev-dist/
 /build
 
 # misc
@@ -43,13 +39,5 @@ yarn-error.log*
 # local data files (KML exports, etc.)
 /data
 
-
-# Serwist generated service worker
-public/sw.js
-public/sw.js.map
-public/swe-worker-*.js
-public/swe-worker-*.js.map
-
 # typescript
 *.tsbuildinfo
-next-env.d.ts
