@@ -27,7 +27,7 @@ export default function AidDistributionMap({
         <h3 className="text-lg font-semibold text-neutral-50">
           {t("Dashboard.aidDistributionMap")}
         </h3>
-        <span className="rounded-full bg-error/20 px-3 py-1 text-xs font-medium text-error">
+        <span className="rounded-full bg-success/20 px-3 py-1 text-xs font-medium text-success">
           {t("Dashboard.liveMap")}
         </span>
       </div>
