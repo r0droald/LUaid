@@ -22,6 +22,8 @@ Main repo: `r0droald/LUaid`. Feature branches (`feat/<name>`, `fix/<name>`) → 
 
 See `docs/setup.md` for local development setup.
 
+- **Before opening a PR**: If your changes affect architecture, schema, project structure, or the design system, update the relevant doc in `docs/` and the Project Structure / Architecture sections of this file.
+
 ## Key Constraints
 
 - **Zero-budget first**: Prefer free-tier services. The project serves volunteer-driven disaster relief.
