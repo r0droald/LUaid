@@ -2,6 +2,13 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import AidDistributionMap from "@/components/AidDistributionMap";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: { changeLanguage: vi.fn() },
+  }),
+}));
+
 vi.mock("@/components/maps/DeploymentMap", () => ({
   default: ({ points }: { points: unknown[] }) => (
     <div data-testid="deployment-map">Map with {points.length} points</div>
@@ -52,6 +59,6 @@ describe("AidDistributionMap", () => {
       <AidDistributionMap barangays={mockBarangays} deploymentPoints={[]} />
     );
     expect(screen.queryByTestId("deployment-map")).not.toBeInTheDocument();
-    expect(screen.getByText(/no deployment data/i)).toBeInTheDocument();
+    expect(screen.getByText("Dashboard.noDeploymentData")).toBeInTheDocument();
   });
 });

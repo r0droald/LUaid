@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/Header";
 import SummaryCards from "@/components/SummaryCards";
 import DonationsByOrg from "@/components/DonationsByOrg";
@@ -29,6 +30,7 @@ type DashboardData = {
 };
 
 export function DashboardPage() {
+  const { t } = useTranslation();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -81,7 +83,7 @@ export function DashboardPage() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-neutral-400">Loading dashboard…</p>
+        <p className="text-neutral-400">{t("Dashboard.loading")}</p>
       </div>
     );
   }
@@ -89,12 +91,12 @@ export function DashboardPage() {
   if (error || !data) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4">
-        <p className="text-error">Failed to load dashboard data</p>
+        <p className="text-error">{t("Dashboard.loadError")}</p>
         <button
           onClick={fetchData}
           className="rounded-lg bg-primary px-4 py-2 text-sm text-white hover:bg-primary/80"
         >
-          Retry
+          {t("Dashboard.retry")}
         </button>
       </div>
     );

@@ -1,6 +1,13 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import DonationsByOrg from "@/components/DonationsByOrg";
+
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: { changeLanguage: vi.fn() },
+  }),
+}));
 
 describe("DonationsByOrg", () => {
   it("renders organization names and amounts", () => {

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 type Props = {
   categories: { name: string; icon: string | null; total: number }[];
 };
@@ -13,10 +15,12 @@ const FALLBACK_ICONS: Record<string, string> = {
 };
 
 export default function GoodsByCategory({ categories }: Props) {
+  const { t } = useTranslation();
+
   return (
     <div className="rounded-xl border border-neutral-400/20 bg-secondary p-6">
       <h3 className="mb-4 text-lg font-semibold text-neutral-50">
-        Goods Purchased
+        {t("Dashboard.goodsPurchased")}
       </h3>
       <div className="grid grid-cols-2 gap-3">
         {categories.map((cat) => (

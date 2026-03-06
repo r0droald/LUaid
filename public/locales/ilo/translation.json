@@ -19,9 +19,15 @@
     "goodsPurchased": "Goods Purchased",
     "aidDistributionMap": "Aid Distribution Map",
     "liveMap": "Live Map",
+    "mapPlaceholder": "Interactive map coming soon",
+    "noDeploymentData": "Awan deployment data a magun-od",
+    "barangayPrefix": "Barangay",
     "deployments": "deployments",
     "beneficiaries": "beneficiaries",
     "online": "Online",
-    "lastUpdated": "Last Updated"
+    "lastUpdated": "Last Updated",
+    "loading": "Loading dashboard\u2026",
+    "loadError": "Failed to load dashboard data",
+    "retry": "Retry"
   }
 }

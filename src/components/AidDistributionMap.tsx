@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import DeploymentMap from "@/components/maps/DeploymentMap";
 
 type DeploymentPoint = {
@@ -18,14 +19,16 @@ export default function AidDistributionMap({
   barangays,
   deploymentPoints,
 }: Props) {
+  const { t } = useTranslation();
+
   return (
     <div className="rounded-xl border border-neutral-400/20 bg-secondary p-6">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-lg font-semibold text-neutral-50">
-          Aid Distribution Map
+          {t("Dashboard.aidDistributionMap")}
         </h3>
         <span className="rounded-full bg-error/20 px-3 py-1 text-xs font-medium text-error">
-          Live Map
+          {t("Dashboard.liveMap")}
         </span>
       </div>
 
@@ -36,7 +39,7 @@ export default function AidDistributionMap({
       ) : (
         <div className="mb-6 flex h-64 items-center justify-center rounded-lg bg-base/30">
           <p className="text-sm text-neutral-400/60">
-            No deployment data available
+            {t("Dashboard.noDeploymentData")}
           </p>
         </div>
       )}
@@ -60,7 +63,7 @@ export default function AidDistributionMap({
                 />
               </svg>
               <span className="text-neutral-400">
-                Barangay {brgy.name}, {brgy.municipality}
+                {t("Dashboard.barangayPrefix")} {brgy.name}, {brgy.municipality}
               </span>
             </div>
             <div className="text-right">
@@ -68,7 +71,7 @@ export default function AidDistributionMap({
                 {brgy.beneficiaries.toLocaleString()}
               </span>
               <span className="ml-1 text-xs text-neutral-400/60">
-                beneficiaries
+                {t("Dashboard.beneficiaries")}
               </span>
             </div>
           </div>
