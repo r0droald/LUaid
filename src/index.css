@@ -22,5 +22,5 @@ body {
 }
 
 .leaflet-popup-content-wrapper {
-  color: var(--color-secondary);
+  color: var(--color-base);
 }

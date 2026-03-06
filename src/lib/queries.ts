@@ -93,7 +93,8 @@ export async function getDeploymentMapPoints() {
   const { data, error } = await supabase
     .from("deployments")
     .select("lat, lng, quantity, unit, organizations(name), aid_categories(name)")
-    .not("lat", "is", null);
+    .not("lat", "is", null)
+    .not("lng", "is", null);
 
   if (error) throw error;
   return data.map((row) => ({
