@@ -18,7 +18,7 @@ npm install
 
 1. Create a new project at [supabase.com/dashboard](https://supabase.com/dashboard)
 2. Go to **SQL Editor** and paste the contents of `supabase/schema.sql` — this creates all tables and seeds the aid categories
-3. Go to **Settings → API** and copy your **Project URL** and **service_role key**
+3. Go to **Settings → API** and copy your **Project URL** and **anon (public) key**
 
 ## 3. Configure Environment
 
@@ -29,11 +29,13 @@ cp .env.example .env.local
 Edit `.env.local` with your Supabase credentials:
 
 ```
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key-here
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key-here
 ```
 
 This file is gitignored. Never commit real keys.
+
+**Note:** The app uses the Supabase **anon key** (not the service role key). This is safe for browser use — access is controlled by Row Level Security (RLS) policies on the database.
 
 ## 4. Seed the Database (Optional)
 
@@ -53,12 +55,12 @@ This parses the KML file and inserts 6 organizations and ~55 deployment records.
 npm run dev
 ```
 
-Opens at [http://localhost:3000](http://localhost:3000). The dev server uses Turbopack and does not generate a service worker.
+Opens at [http://localhost:5173](http://localhost:5173). The Vite dev server provides HMR but does not generate a service worker.
 
 To test offline/PWA behavior, use a production build:
 
 ```bash
-npm run build && npm run start
+npm run build && npm run preview
 ```
 
 ## 6. Run Tests
@@ -78,6 +80,7 @@ npm run lint
 
 | Issue | Fix |
 |-------|-----|
-| `SUPABASE_URL is not defined` | Make sure `.env.local` exists and has both variables set |
+| `VITE_SUPABASE_URL is not defined` | Make sure `.env.local` exists and has both `VITE_` prefixed variables set |
 | Seed script fails with "relation does not exist" | Run `supabase/schema.sql` in the Supabase SQL Editor first |
-| Service worker not working in dev | Expected — Serwist only generates the SW on `npm run build` (webpack). Use a production build to test offline. |
+| Service worker not working in dev | Expected — vite-plugin-pwa only generates the SW on `npm run build`. Use `npm run preview` to test offline. |
+| Port 5173 in use | Vite will auto-increment to the next available port |
