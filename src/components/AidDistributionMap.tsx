@@ -37,7 +37,7 @@ export default function AidDistributionMap({
           <DeploymentMap points={deploymentPoints} />
         </div>
       ) : (
-        <div className="mb-6 flex h-64 items-center justify-center rounded-lg bg-base/30">
+        <div className="mb-6 flex h-[40rem] items-center justify-center rounded-lg bg-base/30">
           <p className="text-sm text-neutral-400/60">
             {t("Dashboard.noDeploymentData")}
           </p>
