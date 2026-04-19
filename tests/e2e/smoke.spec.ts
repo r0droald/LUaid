@@ -73,9 +73,30 @@ test("report page shows hazard form when selected", async ({ page }) => {
 
 test("root renders the landing page", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveURL(/\/$/);
-  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  await expect(page.getByRole("link", { name: /view live demo/i })).toBeVisible();
+
+  // H1 text
+  await expect(page.getByRole("heading", { level: 1, name: /citizen-led disaster relief/i })).toBeVisible();
+
+  // Primary CTA
+  const primaryCta = page.getByRole("link", { name: /view live demo/i }).first();
+  await expect(primaryCta).toBeVisible();
+  await expect(primaryCta).toHaveAttribute("href", "/demo/en");
+
+  // Header CTA
+  const headerCta = page.getByRole("link", { name: /view demo/i });
+  await expect(headerCta).toBeVisible();
+
+  // Hero screenshot
+  await expect(page.getByRole("img", { name: /kapwa help dashboard/i })).toBeVisible();
+
+  // Footer
+  await expect(page.getByText(/mit license/i)).toBeVisible();
+
+  // Screenshot for visual verification
+  await page.screenshot({
+    path: "tests/e2e/screenshots/landing.png",
+    fullPage: true,
+  });
 });
 
 test("old /:locale path redirects to /demo/:locale", async ({ page }) => {
