@@ -45,6 +45,9 @@ yarn-error.log*
 # git worktrees
 .worktrees/
 
+# superpowers brainstorm session artifacts (mockups, server state)
+.superpowers/
+
 # typescript
 *.tsbuildinfo
 supabase/.temp/
