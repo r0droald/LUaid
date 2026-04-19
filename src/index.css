@@ -24,6 +24,15 @@
   --color-neutral-100: #CCDBDC;
   --color-neutral-400: #9AD1D4;
   --color-base: #001A26;
+
+  /* Landing-page palette — scoped by convention to src/pages/LandingPage.tsx.
+     Do NOT use these on /demo/* app routes. */
+  --color-landing-cream: #F4EDDF;
+  --color-landing-ink: #1C1611;
+  --color-landing-sunset: #E85D2F;
+  --color-landing-sunset-deep: #7A3A1F;
+  --color-landing-live: #C93B12;
+
   --font-logo: 'Kagitingan', sans-serif;
 }
 
