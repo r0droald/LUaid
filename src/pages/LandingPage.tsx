@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import LandingHeader from "../components/LandingHeader";
 import "../styles/landing.css";
 
@@ -58,12 +57,14 @@ export default function LandingPage() {
               — Para sa komunidad. Ng komunidad.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                to="/demo/en"
+              <a
+                href="/demo/en"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-md bg-landing-ink px-5 py-3 text-sm font-semibold text-landing-cream hover:opacity-90"
               >
                 View Live Demo →
-              </Link>
+              </a>
               <a
                 href="#story"
                 className="rounded-md border-2 border-landing-ink px-5 py-[10px] text-sm font-semibold text-landing-ink hover:bg-landing-ink/5"
@@ -73,14 +74,14 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <Link to="/demo/en" className="block">
+          <a href="/demo/en" target="_blank" rel="noopener noreferrer" className="block">
             <img
               src="/landing/dashboard.png"
               alt="Kapwa Help dashboard showing relief coordination map and donation tracking"
               className="landing-screenshot-frame w-full rounded-[10px] border-[3px] border-landing-ink"
               loading="eager"
             />
-          </Link>
+          </a>
         </div>
       </section>
 

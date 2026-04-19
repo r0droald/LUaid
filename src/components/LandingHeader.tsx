@@ -30,12 +30,14 @@ export default function LandingHeader() {
           <a href="#get-involved" className="hidden hover:opacity-70 sm:inline">
             Get Involved
           </a>
-          <Link
-            to="/demo/en"
+          <a
+            href="/demo/en"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-md bg-landing-ink px-4 py-2 font-semibold text-landing-cream hover:opacity-90"
           >
             View Demo →
-          </Link>
+          </a>
         </nav>
       </div>
     </header>
