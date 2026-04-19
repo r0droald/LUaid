@@ -14,6 +14,7 @@
     "bootstrap:admin": "tsx scripts/bootstrap-admin.ts",
     "perf": "tsx scripts/perf.ts",
     "perf:mobile": "tsx scripts/perf-mobile.ts",
+    "compress-photos": "tsx scripts/compress-hazard-photos.ts",
     "verify": "npx playwright test",
     "verify:headed": "npx playwright test --headed"
   },
@@ -48,6 +49,7 @@
     "google-translate-api-x": "^10.7.2",
     "jsdom": "^28.1.0",
     "lighthouse": "^13.1.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
