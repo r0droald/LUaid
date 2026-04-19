@@ -2,13 +2,13 @@
 
 ## System Overview
 
-Kapwa Help is a Vite + React SPA that fetches data from Supabase (Postgres) client-side and caches the entire app shell for offline use via a Workbox service worker. The architecture prioritizes simplicity — client-side fetch, render, cache — with room to grow into real-time updates and auth.
+Kapwa Help is a Vite + React SPA that fetches data from Supabase (Postgres) client-side and caches the app shell for offline use via a Workbox service worker. The architecture prioritizes simplicity — client-side fetch, render, cache — with magic-link auth gating admin writes.
 
 ```
 ┌─────────────────────┐   client fetch    ┌──────────────┐
 │   React SPA         │ ──────────────→   │   Supabase   │
 │   (Vite + Router)   │                   │  (Postgres)  │
-│                     │ ← JSON ────────   │              │
+│                     │ ← JSON ────────   │  + Auth      │
 └──────────┬──────────┘                   └──────────────┘
            │
            │  precached shell
@@ -21,107 +21,94 @@ Kapwa Help is a Vite + React SPA that fetches data from Supabase (Postgres) clie
 
 **Data flow:** React components call query functions in `src/lib/queries.ts` → Supabase client (`src/lib/supabase.ts`) fetches from Postgres using the anon key → the app shell is precached by the Workbox service worker → Supabase API calls use NetworkFirst caching → OSM map tiles use CacheFirst (200 tiles, 30-day expiry).
 
-The Supabase anon key is safe for browser use — Row Level Security (RLS) policies control access.
+The Supabase anon key is safe for browser use — Row Level Security (RLS) policies control access. Admins authenticate via Supabase magic link; the `admin_users` table gates write access to sensitive records (donations, purchases, deployments, need-lifecycle updates).
 
 ### Code Splitting
 
-The map component (`ReliefMapLeaflet`) is lazy-loaded via `React.lazy` to keep the main bundle small. A `MapSkeleton` loading state displays while the chunk downloads. The PWA service worker precaches all chunks, so this primarily improves first-visit performance.
+Route pages (`ReliefMapPage`, `TransparencyPage`, `ReportPage`, `LoginPage`, `AuthCallbackPage`) are lazy-loaded via `React.lazy` + `lazyWithReload` to keep the main bundle small and to recover gracefully from stale chunk hashes after a deploy. The PWA service worker precaches all chunks, so splitting primarily improves first-visit performance.
 
 ## Routes
 
-Three pages, all under locale-prefixed routes (`/:locale`):
+Client-side routing via react-router v7. Locale-prefixed under `/:locale`.
 
 | Route | Page | Purpose |
 |-------|------|---------|
-| `/:locale` | Relief Map | Full-screen map with need pins, hazard markers, hub markers, legend, and summary bar |
-| `/:locale/transparency` | Transparency | Donation summaries, inventory levels, barangay equity, recent purchases |
-| `/:locale/report` | Report | Multi-form reporter — submit needs, donations, purchases, or hazards |
+| `/` | redirect | → `/en` |
+| `/:locale` | Relief Map | Full-screen map: need pins, hazard markers, hub markers, legend, summary bar |
+| `/:locale/dashboard` | Transparency | Donation totals, inventory levels, barangay equity, recent activity |
+| `/:locale/transparency` | redirect | → `/:locale/dashboard` (legacy URL, preserved for external links) |
+| `/:locale/report` | Report | Multi-form reporter — need / hazard, plus donation / purchase for admins |
+| `/:locale/login` | Login | Magic-link sign-in for admins |
+| `/auth/callback` | Auth callback | Supabase OAuth redirect target |
 
-Supported locales: `en` (English), `fil` (Filipino), `ilo` (Ilocano). Root `/` redirects to `/en`.
+Supported locales: `en` (English), `fil` (Filipino), `ilo` (Ilocano).
 
 ## Database Schema
 
-Nine tables, event-scoped. All primary keys are UUIDs — designed for offline sync with collision-free IDs. Full SQL: `supabase/schema.sql`.
-
-```
-events ──┬──→ submissions (needs) ←── aid_categories
-         │         ↑                       ↑   ↑
-         │         │ submission_id          │   │
-         ├──→ deployments ←── organizations │   │
-         │                        │         │   │
-         │                        └──→ donations (cash or in-kind)
-         │                        │         │
-         │                        └──→ purchases
-         ├──→ hazards                       │
-         │                                  │
-         └───────────────────── barangays ←─┘
-```
+Fourteen tables total — thirteen event-scoped + `admin_users` (global). All primary keys are UUIDs for collision-free IDs across offline devices. Full SQL: `supabase/schema.sql`.
 
 ### Tables
 
-| Table | Purpose | Key Fields |
-|-------|---------|------------|
-| `events` | Disaster operations that scope all data | name, slug, region, started_at, is_active |
-| `organizations` | Donors and deployment hubs (no type column — role derived from usage) | name, municipality, lat/lng (optional, for hub map markers) |
-| `aid_categories` | 9 unified categories | name, icon |
-| `barangays` | Geographic aggregation | name, municipality, lat/lng, population |
-| `donations` | Monetary or in-kind contributions | type (`cash`/`in_kind`), organization_id, amount (cash) or aid_category_id + quantity + unit (in-kind), date, notes |
-| `purchases` | Goods bought with donation money | event_id, organization_id, aid_category_id, quantity, unit, cost, date |
-| `submissions` | Needs from the field — pin lifecycle | event_id, status (`pending→verified→in_transit→completed→resolved`), aid_category_id, access_status, urgency, num_adults/children/seniors_pwd, lat/lng, photo URLs |
-| `deployments` | Aid delivery events — optionally fulfills a specific need | event_id, organization_id, submission_id (optional), aid_category_id, quantity, status (`pending`/`received`) |
-| `hazards` | Field-reported hazard conditions | event_id, hazard_type (`flood`/`landslide`/`road_blocked`/`bridge_out`/`electrical_hazard`/`other`), status (`active`/`resolved`), lat/lng |
+| Table | Purpose |
+|-------|---------|
+| `events` | Disaster operations that scope all other data |
+| `admin_users` | Keyed by `auth.uid()`; presence grants admin via `is_admin()` RLS helper |
+| `organizations` | Financial/accountability layer (donors, implementing partners) |
+| `deployment_hubs` | Operational/map layer with lat/lng — independent from orgs |
+| `hub_inventory` | Junction: which aid categories a hub currently has (checklist, no quantities) |
+| `aid_categories` | 9 unified categories |
+| `needs` | Field-reported demand. Lifecycle: `pending → verified → in_transit → confirmed`. `num_people` for beneficiary count |
+| `need_categories` | Junction: multi-select aid types per need |
+| `donations` | Cash (`amount`) or in-kind. `donor_type` = `individual` / `organization` |
+| `donation_categories` | Junction: multi-select for in-kind donations |
+| `purchases` | Org spending. No quantities — just `cost` |
+| `purchase_categories` | Junction: multi-select per purchase |
+| `hazards` | Freeform `description` (no type enum). Status: `active` / `resolved` |
+| `deployments` | Fulfillment record linking a hub to a confirmed need. Schema-only — no active UI renders deployments today |
 
 **Aid categories** (Hannah's unified 9-category list): Hot Meals, Drinking Water, Water Filtration, Temporary Shelter, Clothing, Construction Materials, Medical Supplies, Hygiene Kits, Canned Food.
 
-**Inventory formula:** Available inventory = (in-kind donations + purchases) − deployments.
-
 ### RLS Policies
 
-Defined in `supabase/rls-demo.sql` (demo project) and `supabase/rls-prod.sql` (prod project):
-- **Anon read:** SELECT on all tables
-- **Anon insert:** INSERT on submissions, deployments, donations, purchases, hazards
-- **Anon update:** UPDATE on submissions and deployments
+Two policy sets:
 
-Demo phase — write policies will be tightened when auth is implemented.
+- **`supabase/rls-demo.sql`** — demo project, permissive. Anon can SELECT/INSERT/UPDATE across all tables.
+- **`supabase/rls-prod.sql`** — prod project, auth-gated. Anon reads go through PII-stripped views (`needs_public`, `hazards_public`); anon can only INSERT `needs` / `need_categories` / `hazards`; donations, purchases, deployments, and need-lifecycle updates are admin-only via the `is_admin()` helper.
+
+Admins are provisioned via an invite-only flow: edge function → `auth.admin.inviteUserByEmail` → `handle_new_user` trigger (gated on `invited_at IS NOT NULL`) inserts into `admin_users`.
+
+### RPC Functions
+
+Defined in `supabase/rpc-functions.sql`. All multi-table inserts use Postgres functions for transaction safety — parent row + junction rows are atomic.
+
+- `insert_need` — need + need_categories
+- `insert_donation` — donation + donation_categories
+- `insert_purchase` — purchase + purchase_categories
+- `create_deployment` — deployment + need status update
+
+Clients call via `supabase.rpc("function_name", { params })`.
 
 ### Query Functions
 
-`src/lib/queries.ts` provides 25 typed functions organized by domain:
+`src/lib/queries.ts` exposes typed functions organized by domain. See the file for the full list; highlights:
 
-**Relief Map:**
-- `getNeedsMapPoints()` — need pins with lat/lng, status, category, access, urgency
-- `getDeploymentHubs()` — hub markers with org info and deployment counts
-- `getHazards()` — hazard markers with type and status
-
-**Transparency Dashboard:**
-- `getTotalDonations()` — sum of cash donations
-- `getTotalSpent()` — sum of purchase costs
-- `getTotalBeneficiaries()` / `getPeopleServed()` — beneficiary counts
-- `getDonationsByOrganization()` — donations grouped by org
-- `getGoodsByCategory()` — quantities by aid category
-- `getBarangayDistribution()` — distribution equity across barangays
-- `getAvailableInventory()` — current inventory levels (donations + purchases − deployments)
-- `getRecentDeployments()` / `getRecentPurchases()` — recent activity feeds
-
-**Form Support:**
-- `getActiveEvent()` — current active disaster event
-- `getBarangays()` — all barangays (form dropdowns)
-- `getAidCategories()` — all aid categories
-- `getOrganizations()` — all organizations
-
-**Writes:**
-- `insertSubmission()` — field need report
-- `insertDonation()` — cash or in-kind donation
-- `insertPurchase()` — purchase record
-- `insertHazard()` — hazard report
-- `createDeploymentForNeed()` — link a deployment to a need (claim flow)
-- `updateSubmissionStatus()` / `updateDeploymentStatus()` — lifecycle transitions
+- **Relief Map:** `getNeedsMapPoints`, `getDeploymentHubs`, `getHazards`
+- **Transparency:** `getTotalDonations`, `getTotalSpent`, `getTotalBeneficiaries`, `getDonationsByOrganization`, `getBarangayDistribution`
+- **Form support:** `getActiveEvent`, `getAidCategories`, `getOrganizations`
 
 ## Seed Data
 
-Demo data: `supabase/seed-demo.sql` (self-contained, idempotent). Deploy path: drop all tables → run `schema.sql` → run `seed-demo.sql`.
+Demo data: `supabase/seed-demo.sql` (self-contained, idempotent).
 
-Historical KML data from Typhoon Emong relief operations is in `data/Emong_relief_operations.kml` (55 deployment points across 6 organizations).
+**Deploy path (bootstrapping a fresh Supabase project):**
+
+1. Drop all tables
+2. Run `supabase/schema.sql`
+3. Run `supabase/rpc-functions.sql`
+4. Run `supabase/rls-demo.sql` (or `rls-prod.sql` for auth-gated)
+5. Run `supabase/seed-demo.sql`
+
+Historical KML data from Typhoon Emong relief operations is archived under `data/Emong_relief_operations.kml`.
 
 ## Key Decisions
 
@@ -133,17 +120,17 @@ Historical KML data from Typhoon Emong relief operations is in `data/Emong_relie
 | Routing | react-router v7 | Client-side routing, locale via URL params, works offline |
 | PWA | vite-plugin-pwa (Workbox GenerateSW) | Precaches shell, navigateFallback to index.html, runtime caching |
 | Primary keys | UUIDs | Collision-free IDs for offline sync from multiple devices |
-| Schema | Needs-first, event-scoped | Events scope all data. Submissions (needs) are primary with pin lifecycle. Deployments fulfill needs |
-| Data entry | Report form + Supabase table editor | Field-facing multi-form with offline outbox; table editor for admin bulk entry |
-| Categories | 9 unified list | Hannah's consolidated list replaces separate dashboard/gap categories |
-| Donations model | Cash + in-kind | Single `donations` table with type discriminator and CHECK constraints |
+| Schema shape | Event-scoped, junction-table categories | Events scope all data. Multi-category selects via junctions avoid denormalization |
+| Multi-row writes | Postgres RPC functions | Transaction safety — parent + junction rows insert atomically |
+| Auth | Supabase magic link + `admin_users` gate | No password UX; admin status is a DB-level concern not a claim in the JWT |
+| Categories | 9 unified aid categories | Hannah's consolidated list replaces separate dashboard/gap categories |
 
 ## Offline Strategy
 
-- **App shell:** Workbox precaches all JS/CSS/HTML chunks. NavigateFallback to `index.html`.
+- **App shell:** Workbox precaches JS/CSS/HTML chunks. NavigateFallback to `index.html`.
 - **Dashboard data:** Stale-while-revalidate via IndexedDB (`src/lib/cache.ts`). Cached data renders immediately; fresh data fetched in background.
 - **Map tiles:** CacheFirst for OSM tiles (200 tiles, 30-day expiry). Fallback overlay after 3 consecutive tile errors.
-- **Submit form:** Dropdown options cached in IndexedDB. Submissions queued in IndexedDB outbox with client-generated UUIDs. `OutboxProvider` context auto-syncs on `online` event.
+- **Report form:** Dropdown options cached in IndexedDB. Submissions queued in IndexedDB outbox with client-generated UUIDs. `OutboxProvider` auto-syncs on `online` event.
 - **Offline indicator:** Shows "Offline" when `navigator.onLine` is false. Auto-refreshes on reconnect.
 
 ## Internationalization
@@ -154,6 +141,7 @@ Machine translation: `npm run translate` uses `google-translate-api-x` (free, no
 
 ## Further Reading
 
-- `docs/plans/` — Design documents for each implementation phase
 - `docs/project-history.md` — Origin story and project direction
 - `docs/scope.md` — KapwaRelief charter and product scope
+- `docs/loading-performance-findings.md` — Performance investigation reference
+- `.claude/rules/` — Agent-scoped how-to files (supabase, design-system, i18n, offline, verification)

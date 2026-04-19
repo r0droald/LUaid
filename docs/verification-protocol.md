@@ -1,6 +1,6 @@
 # UI Verification Protocol
 
-How to verify UI changes with Playwright.
+How to verify UI changes with Playwright. Human-readable reference — see `.claude/rules/verification.md` for the agent-scoped version.
 
 ## Quick Verification
 
@@ -9,29 +9,28 @@ npm run verify          # Headless — all smoke tests
 npm run verify:headed   # Headed — watch tests run in browser
 ```
 
-All 9 smoke tests should pass. Any failure means a UI regression.
+All smoke tests should pass. Any failure means a UI regression.
 
 ## Route Reference
 
 | Route | Page | Key Elements |
 |-------|------|-------------|
-| `/:locale` | Dashboard | Header (`Kapwa Help`), `<h1>`, locale `<select>`, summary cards |
-| `/:locale/submit` | Submit Form | Header, `<h1>`, `<form>`, required fields (`#contact_name`, `#barangay_id`, `gap_category` radios, `access_status` dropdown, `urgency`), submit button |
+| `/:locale` | Relief Map | Header, map with legend, summary bar, zoom controls |
+| `/:locale/dashboard` | Transparency | Header, `<h1>`, summary cards, inventory, barangay equity |
+| `/:locale/report` | Report | Header, `<h1>`, form-type selector (need / hazard / donation / purchase) |
+| `/:locale/login` | Login | Magic-link email input |
+| `/auth/callback` | Auth callback | Handles Supabase redirect |
 
-Supported locales: `en`, `fil`, `ilo`
+Supported locales: `en`, `fil`, `ilo`. The `/:locale/transparency` path 302s to `/:locale/dashboard` for legacy links.
 
 ## Taking Screenshots
 
-Smoke tests automatically save full-page screenshots to `tests/e2e/screenshots/`:
+Smoke tests save full-page screenshots to `tests/e2e/screenshots/`:
 
-| File | Content |
-|------|---------|
-| `dashboard-en.png` | Dashboard in English |
-| `dashboard-fil.png` | Dashboard in Filipino |
-| `dashboard-ilo.png` | Dashboard in Ilocano |
-| `submit-en.png` | Submit page in English |
-| `submit-fil.png` | Submit page in Filipino |
-| `submit-ilo.png` | Submit page in Ilocano |
+- `relief-map-{en,fil,ilo}.png`
+- `transparency-{en,fil,ilo}.png`
+- `report-{en,fil,ilo}.png`
+- `mobile-nav.png`
 
 For ad-hoc screenshots of a specific URL:
 
@@ -39,15 +38,16 @@ For ad-hoc screenshots of a specific URL:
 npx playwright screenshot http://localhost:5173/en screenshot.png
 ```
 
-## Checking Specific Tests
-
-Use `--grep` to filter tests:
+## Filtering Tests
 
 ```bash
-npx playwright test --grep "dashboard"       # Only dashboard tests
-npx playwright test --grep "submit"          # Only submit page tests
-npx playwright test --grep "locale switcher" # Only locale switcher test
-npx playwright test --grep "redirect"        # Only redirect tests
+npx playwright test --grep "relief map"
+npx playwright test --grep "dashboard"
+npx playwright test --grep "report"
+npx playwright test --grep "locale switcher"
+npx playwright test --grep "nav links"
+npx playwright test --grep "mobile hamburger"
+npx playwright test --grep "redirect"
 ```
 
 ## Form Interaction Verification
@@ -55,33 +55,18 @@ npx playwright test --grep "redirect"        # Only redirect tests
 Use Playwright's codegen tool to interactively test form flows:
 
 ```bash
-npx playwright codegen http://localhost:5173/en/submit
+npx playwright codegen http://localhost:5173/en/report
 ```
 
-This opens a browser with a recording panel — interact with the form and Playwright generates the test code.
-
-## Locale Switching Verification
-
-The smoke tests verify locale switching automatically. To manually test:
-
-```bash
-npx playwright test --grep "locale switcher" --headed
-```
+The report page is a type selector that renders one of four forms (need, hazard, donation, purchase). Donation and purchase forms only render for signed-in admins.
 
 ## Offline Behavior Testing
 
-Offline testing requires a production build (service worker is only generated on build):
+Offline testing requires a production build — the Vite dev server does not generate a service worker:
 
 ```bash
 npm run build && npm run preview
 # Then test against http://localhost:4173 instead of :5173
-```
-
-Note: The Playwright config's `webServer` targets the dev server on :5173. For offline testing, start the preview server manually and run Playwright with a different base URL:
-
-```bash
-npx playwright test --config=playwright.config.ts --grep "dashboard" \
-  --project=chromium
 ```
 
 ## When to Verify
@@ -97,9 +82,9 @@ Run `npm run verify` after changing:
 
 | Problem | Solution |
 |---------|----------|
-| Tests timeout | Check that dev server is running (`npm run dev`) or let Playwright auto-start it |
+| Tests timeout | Check dev server is running (`npm run dev`) or let Playwright auto-start it |
 | Port 5173 in use | Stop other dev servers or use `reuseExistingServer: true` (default) |
 | Chromium not found | Run `npx playwright install chromium` |
 | Screenshots not generated | Tests must pass — screenshots are taken at the end of each test |
+| Form fields not found | Check Supabase env vars are set (form options load from Supabase or cache) |
 | Flaky locale tests | Ensure translation JSON files exist in `public/locales/{en,fil,ilo}/` |
-| Form fields not found | Check that Supabase env vars are set (form options load from Supabase or cache) |
