@@ -152,7 +152,10 @@ BEGIN
   ON CONFLICT DO NOTHING;
 
   -- ============================================================
-  -- Needs (15 needs: 8 pending, 3 verified, 4 in_transit, 0 confirmed)
+  -- Needs (20 needs: 8 pending, 3 verified, 4 in_transit, 5 confirmed)
+  -- Confirmed needs represent completed deliveries — drive the
+  -- "Total Beneficiaries" dashboard stat. They don't appear on
+  -- the map (map filters to pending/verified/in_transit).
   -- ============================================================
   INSERT INTO needs (id, event_id, hub_id, lat, lng, access_status, urgency, status, num_people, contact_name, contact_phone, notes) VALUES
     -- 8 pending
@@ -202,7 +205,23 @@ BEGIN
      'Benjamin Cortez', '09195556677', 'Medical team en route — pregnant women and children need care'),
     ('d0000000-0000-0000-0000-000000000015', 'a0000000-0000-0000-0000-000000000001',
      'c0000000-0000-0000-0000-000000000005', 16.8478, 120.3723, '4x4', 'high', 'in_transit', 65,
-     'Teresita Gomez', '09207778899', 'Shelter materials and tarps being delivered by Luna hub team')
+     'Teresita Gomez', '09207778899', 'Shelter materials and tarps being delivered by Luna hub team'),
+    -- 5 confirmed (past deliveries — feed Total Beneficiaries on dashboard; excluded from map)
+    ('d0000000-0000-0000-0000-000000000016', 'a0000000-0000-0000-0000-000000000001',
+     'c0000000-0000-0000-0000-000000000001', 16.6612, 120.3378, 'truck', 'medium', 'confirmed', 40,
+     'Dominga Herrera', '09171112233', 'Medical supplies delivered 2026-04-04 — insulin and wound care for elderly'),
+    ('d0000000-0000-0000-0000-000000000017', 'a0000000-0000-0000-0000-000000000001',
+     'c0000000-0000-0000-0000-000000000002', 16.7398, 120.3478, '4x4', 'high', 'confirmed', 75,
+     'Felipe Morales', '09184445566', 'Clothing and hygiene kits delivered 2026-04-06 — 15 families'),
+    ('d0000000-0000-0000-0000-000000000018', 'a0000000-0000-0000-0000-000000000001',
+     'c0000000-0000-0000-0000-000000000004', 16.5412, 120.3456, 'truck', 'medium', 'confirmed', 60,
+     'Imelda Santos', '09197778822', 'Hot meals and drinking water delivered 2026-04-08 — 3-day supply'),
+    ('d0000000-0000-0000-0000-000000000019', 'a0000000-0000-0000-0000-000000000001',
+     'c0000000-0000-0000-0000-000000000006', 16.3312, 120.3678, 'truck', 'low', 'confirmed', 55,
+     'Roberto Cruz', '09205556644', 'Canned food distribution completed 2026-04-11 — 12 households'),
+    ('d0000000-0000-0000-0000-000000000020', 'a0000000-0000-0000-0000-000000000001',
+     'c0000000-0000-0000-0000-000000000005', 16.8534, 120.3689, '4x4', 'high', 'confirmed', 50,
+     'Corazon Del Rosario', '09173338811', 'Shelter materials + blankets delivered 2026-04-14 — 10 families rebuilt')
   ON CONFLICT (id) DO UPDATE SET
     hub_id = EXCLUDED.hub_id,
     lat = EXCLUDED.lat,
@@ -248,7 +267,16 @@ BEGIN
     ('d0000000-0000-0000-0000-000000000013', cat_hygiene),
     ('d0000000-0000-0000-0000-000000000014', cat_medical),
     ('d0000000-0000-0000-0000-000000000015', cat_shelter),
-    ('d0000000-0000-0000-0000-000000000015', cat_construction)
+    ('d0000000-0000-0000-0000-000000000015', cat_construction),
+    -- Confirmed needs
+    ('d0000000-0000-0000-0000-000000000016', cat_medical),
+    ('d0000000-0000-0000-0000-000000000017', cat_clothing),
+    ('d0000000-0000-0000-0000-000000000017', cat_hygiene),
+    ('d0000000-0000-0000-0000-000000000018', cat_hot_meals),
+    ('d0000000-0000-0000-0000-000000000018', cat_water),
+    ('d0000000-0000-0000-0000-000000000019', cat_canned),
+    ('d0000000-0000-0000-0000-000000000020', cat_shelter),
+    ('d0000000-0000-0000-0000-000000000020', cat_clothing)
   ON CONFLICT DO NOTHING;
 
   -- ============================================================
