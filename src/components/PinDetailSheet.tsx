@@ -152,6 +152,21 @@ export default function PinDetailSheet({ point, onClose, onStatusChange, variant
           <span className="text-neutral-400">{t("PinDetail.contactName")}</span>
           <p className="text-neutral-50">{point.contactName}</p>
         </div>
+        <AdminOnly>
+          {point.contactPhone && (
+            <div>
+              <span className="text-neutral-400">{t("PinDetail.contactPhone")}</span>
+              <p className="text-neutral-50">
+                <a
+                  href={`tel:${point.contactPhone}`}
+                  className="text-primary hover:text-primary/80"
+                >
+                  {point.contactPhone}
+                </a>
+              </p>
+            </div>
+          )}
+        </AdminOnly>
         <div>
           <span className="text-neutral-400">{t("PinDetail.submitted")}</span>
           <p className="text-neutral-50">{relativeTime}</p>
