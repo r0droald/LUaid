@@ -17,7 +17,7 @@ const formOptions: { value: FormType; labelKey: string }[] = [
   { value: "purchase", labelKey: "ReportForm.optionPurchase" },
 ];
 
-export function ReportPage() {
+export default function ReportPage() {
   const { t } = useTranslation();
   const { isAdmin } = useAuthContext();
   const [formType, setFormType] = useState<FormType | null>(null);

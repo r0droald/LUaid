@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { prewarmTileCache } from "@/lib/tile-prewarm";
 import { Outlet, useParams, Navigate } from "react-router";
 import { useTranslation } from "react-i18next";
@@ -39,7 +39,9 @@ export function RootLayout() {
 
   return (
     <OutboxProvider>
-      <Outlet />
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
     </OutboxProvider>
   );
 }

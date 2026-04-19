@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { useAuthContext } from '../lib/auth-context';
 
-export function LoginPage() {
+export default function LoginPage() {
   const { login } = useAuthContext();
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');

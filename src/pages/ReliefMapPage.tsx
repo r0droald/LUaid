@@ -18,7 +18,7 @@ import {
 import { supabase } from "@/lib/supabase";
 import { useAuthContext } from "@/lib/auth-context";
 
-export function ReliefMapPage() {
+export default function ReliefMapPage() {
   const { t } = useTranslation();
   const { isAdmin } = useAuthContext();
   const [data, setData] = useState<ReliefMapData | null>(null);
