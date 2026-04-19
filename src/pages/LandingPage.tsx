@@ -89,7 +89,7 @@ export default function LandingPage() {
       <section id="story" className="bg-landing-ink px-6 py-20 text-landing-cream md:px-10 md:py-28">
         <div className="mx-auto grid max-w-[1100px] gap-10 md:grid-cols-[1fr_2fr] md:gap-14">
           <div>
-            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.35em] text-landing-sunset">
+            <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.3em] text-landing-sunset">
               The Story
             </p>
             <h2 className="font-logo text-4xl leading-[0.95] md:text-[56px]">
@@ -123,7 +123,7 @@ export default function LandingPage() {
       {/* ---------- FEATURES ---------- */}
       <section id="features" className="bg-landing-cream px-6 py-20 md:px-10 md:py-28">
         <div className="mx-auto max-w-[1100px]">
-          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.35em] text-landing-sunset">
+          <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.3em] text-landing-sunset">
             Features
           </p>
           <h2 className="mb-10 max-w-[16ch] font-logo text-4xl leading-[0.95] md:text-[56px]">
@@ -134,10 +134,10 @@ export default function LandingPage() {
             {/* 01 — Relief Map */}
             <li className="border-b-2 border-landing-ink py-6 md:border-r-2 md:pr-7">
               <div className="mb-2 flex items-center gap-3">
-                <p className="font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
+                <p className="font-logo text-[14px] tracking-[0.2em] text-landing-sunset">
                   01 / RELIEF MAP
                 </p>
-                <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-landing-live">
+                <div className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.3em] text-landing-live">
                   <span className="landing-pulse-dot" aria-hidden="true" />
                   Live
                 </div>
@@ -152,7 +152,7 @@ export default function LandingPage() {
 
             {/* 02 — Transparency Dashboard */}
             <li className="border-b-2 border-landing-ink py-6 md:pl-7">
-              <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
+              <p className="mb-2 font-logo text-[14px] tracking-[0.2em] text-landing-sunset">
                 02 / TRANSPARENCY DASHBOARD
               </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
@@ -165,7 +165,7 @@ export default function LandingPage() {
 
             {/* 03 — Offline First */}
             <li className="border-b-2 border-landing-ink py-6 md:border-r-2 md:pr-7">
-              <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
+              <p className="mb-2 font-logo text-[14px] tracking-[0.2em] text-landing-sunset">
                 03 / OFFLINE FIRST
               </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
@@ -178,7 +178,7 @@ export default function LandingPage() {
 
             {/* 04 — Multilingual */}
             <li className="border-b-2 border-landing-ink py-6 md:pl-7">
-              <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
+              <p className="mb-2 font-logo text-[14px] tracking-[0.2em] text-landing-sunset">
                 04 / MULTILINGUAL
               </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
@@ -192,7 +192,7 @@ export default function LandingPage() {
 
           {/* 05 — Open Source closer (full-width) */}
           <div className="border-b-2 border-landing-ink py-10 text-center md:py-14">
-            <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
+            <p className="mb-2 font-logo text-[14px] tracking-[0.2em] text-landing-sunset">
               05 / OPEN SOURCE
             </p>
             <h3 className="mx-auto mb-4 max-w-[18ch] font-logo text-[28px] leading-tight text-landing-ink md:text-[40px]">
@@ -233,7 +233,7 @@ export default function LandingPage() {
         <span className="landing-grain absolute inset-0" aria-hidden="true" />
 
         <div className="relative mx-auto max-w-[700px]">
-          <p className="mb-3 text-[10px] font-extrabold uppercase tracking-[0.35em]">
+          <p className="mb-3 text-[12px] font-extrabold uppercase tracking-[0.3em]">
             Get Involved
           </p>
           <h2 className="mb-4 font-logo text-4xl leading-[0.95] md:text-[58px]">
