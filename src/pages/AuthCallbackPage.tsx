@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { supabase } from '../lib/supabase';
 
-export function AuthCallbackPage() {
+export default function AuthCallbackPage() {
   const navigate = useNavigate();
   const [message, setMessage] = useState('Signing you in…');
 

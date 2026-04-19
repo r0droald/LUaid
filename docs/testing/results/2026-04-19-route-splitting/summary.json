@@ -1,0 +1,47 @@
+{
+  "label": "2026-04-19-route-splitting",
+  "url": "http://localhost:4273/en",
+  "runs": 3,
+  "profile": {
+    "network": {
+      "offline": false,
+      "downloadThroughput": 51200,
+      "uploadThroughput": 51200,
+      "latency": 2000
+    },
+    "cpuSlowdown": 6,
+    "viewport": {
+      "width": 412,
+      "height": 869
+    },
+    "deviceScaleFactor": 2.625
+  },
+  "cache": "cold",
+  "capturedAt": "2026-04-19T15:57:09.939Z",
+  "runs_data": [
+    {
+      "navigationStart": 0,
+      "firstPaint": 4672,
+      "firstContentfulPaint": 4672,
+      "domContentLoaded": 7658.800000190735,
+      "loadEvent": 7658.900000095367,
+      "screenshotCount": 27
+    },
+    {
+      "navigationStart": 0,
+      "firstPaint": 4640,
+      "firstContentfulPaint": 4640,
+      "domContentLoaded": 7658.699999809265,
+      "loadEvent": 7658.799999952316,
+      "screenshotCount": 27
+    },
+    {
+      "navigationStart": 0,
+      "firstPaint": 4640,
+      "firstContentfulPaint": 4640,
+      "domContentLoaded": 7659.599999904633,
+      "loadEvent": 7659.700000047684,
+      "screenshotCount": 27
+    }
+  ]
+}

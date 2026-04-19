@@ -403,6 +403,8 @@ fetching over the network."
 
 Currently `src/router.tsx` statically imports all three page components, bundling ~91 KB of unused JS on every visit. Lazy-loading them creates independently-retryable chunks — each page becomes a smaller fetch that can fail and retry independently instead of a single monolithic 600 KB bundle where any TCP interruption forces a full restart.
 
+> **Expanded during implementation (2026-04-19):** shipped with all 5 routed pages lazy-loaded, not just the 3 listed below. `LoginPage` and `AuthCallbackPage` (at `/auth/callback`, top-level outside the locale layout) were added for the same retry-resilience reason — Workbox precaches all chunks at SW install, so offline forms still work. See `docs/testing/results/2026-04-19-route-splitting/` for measurements.
+
 **Files:**
 - Modify: `src/pages/ReliefMapPage.tsx` (line 20)
 - Modify: `src/pages/TransparencyPage.tsx` (line 22)
