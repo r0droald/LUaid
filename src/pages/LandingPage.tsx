@@ -133,13 +133,15 @@ export default function LandingPage() {
           <ul className="grid grid-cols-1 border-t-2 border-landing-ink md:grid-cols-2">
             {/* 01 — Live map */}
             <li className="border-b-2 border-landing-ink py-6 md:border-r-2 md:pr-7">
-              <div className="mb-2 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-landing-live">
-                <span className="landing-pulse-dot" aria-hidden="true" />
-                Live
+              <div className="mb-2 flex items-center gap-3">
+                <p className="font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
+                  01 / MAP
+                </p>
+                <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-landing-live">
+                  <span className="landing-pulse-dot" aria-hidden="true" />
+                  Live
+                </div>
               </div>
-              <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
-                01 / MAP
-              </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
                 See where aid is going, right now.
               </h3>
