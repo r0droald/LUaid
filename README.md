@@ -8,26 +8,27 @@ Kapwa Help is a Progressive Web App that tracks donations, volunteer deployments
 
 We publish this software openly in the hope that it's useful for disaster relief operations in your community too.
 
-![LUaid Dashboard](docs/dashboard-screenshot.png)
+![Kapwa Help dashboard](docs/dashboard-screenshot.png)
 
 ## What It Does
 
-- **Transparency dashboard** — live tracking of donations, beneficiaries, volunteer counts, and deployment activity across organizations
-- **Interactive deployment map** — GPS-tagged aid deliveries visualized on a Leaflet/OpenStreetMap layer
-- **Offline-capable PWA** — the full app shell is cached on-device via service worker, works without internet
+- **Relief map** — field-reported needs, hazards, and deployment hubs on a Leaflet/OpenStreetMap layer, with status-coded pins and lifecycle tracking (pending → verified → in transit → confirmed)
+- **Transparency dashboard** — live totals for donations, purchases, and beneficiaries, plus barangay-level distribution equity and hub inventory
+- **Report form** — multi-form reporter for needs, hazards, donations, and purchases, with offline-capable submission queueing
+- **Offline-capable PWA** — the app shell is precached on-device via service worker; map tiles and dashboard data use stale-while-revalidate caching
 - **Multilingual** — English, Filipino, and Ilocano with a one-click language switcher
-- **Zero-budget infrastructure** — Supabase free tier for the database, Vercel for hosting, no paid services
+- **Zero-budget infrastructure** — Supabase free tier for the database and auth, Vercel for hosting, no paid services
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/r0droald/LUaid.git
-cd LUaid
+git clone https://github.com/kapwa-help/kapwa-help.git
+cd kapwa-help
 npm install
 npm run dev
 ```
 
-You'll need a `.env.local` file with Supabase credentials — see [docs/setup.md](docs/setup.md) for the full setup guide, including shared database access and seed data details.
+You'll need a `.env.local` file with Supabase credentials. See [docs/architecture.md](docs/architecture.md) for the system overview, database schema, and seed data flow.
 
 ## Tech Stack
 
@@ -45,19 +46,20 @@ For architecture decisions, database schema, and system design details, see [doc
 
 ## Get Involved
 
-LUaid is a volunteer-driven project and we welcome help from anyone — developers, designers, writers, translators, relief coordinators, or anyone who wants to contribute. Every skill set has a place here.
+Kapwa Help is a volunteer-driven project and we welcome help from anyone — developers, designers, writers, translators, relief coordinators, or anyone who wants to contribute. Every skill set has a place here.
 
-Check the [Issues](https://github.com/r0droald/LUaid/issues) tab to find something to work on, or open a new issue if you have ideas. If you're a developer, [docs/setup.md](docs/setup.md) will get you running locally in a few minutes.
+Check the [Issues](https://github.com/kapwa-help/kapwa-help/issues) tab to find something to work on, or open a new issue if you have ideas.
 
 ## Documentation
 
 | Doc | What's inside |
 |-----|---------------|
-| [Architecture](docs/architecture.md) | System design, database schema, query functions, key decisions, what's built vs planned |
-| [Local Setup](docs/setup.md) | Environment setup, seed data, testing, troubleshooting |
+| [Architecture](docs/architecture.md) | System design, routes, database schema, RLS policies, key decisions |
 | [Design System](docs/design-system.md) | Color tokens, typography, component patterns |
-| [i18n Guide](docs/i18n.md) | Translation workflow, script usage, adding new languages |
+| [i18n Guide](docs/i18n.md) | Translation workflow, script usage, namespace conventions |
+| [Verification Protocol](docs/verification-protocol.md) | How to run and filter Playwright smoke tests |
 | [Project History](docs/project-history.md) | Origin story, goals, and project direction |
+| [Project Scope](docs/scope.md) | KapwaRelief charter and product scope |
 
 ## License
 
