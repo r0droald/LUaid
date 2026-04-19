@@ -1,8 +1,8 @@
 # Tenant Deploy, Landing Page, and Open-Source Architecture
 
 **Date:** 2026-04-16
-**Status:** Deferred — decisions captured for future consideration
-**Why deferred:** Higher priority is polishing the current demo, shipping it to La Union contacts for signoff, and gathering real feedback before committing to landing-page / template work.
+**Status:** Partially superseded — sections 1 and 2 (landing page + `/demo/:locale` refactor) are now being executed per [2026-04-19 landing-page-and-demo-refactor design](./2026-04-19-landing-page-and-demo-refactor.md) and [its implementation plan](./2026-04-19-landing-page-and-demo-refactor-implementation.md). Everything else in this doc (demo-mode flag, open-source, template extraction, tenant subdomains, auth) remains deferred.
+**Original reason for deferring:** Higher priority was polishing the current demo, shipping it to La Union contacts for signoff, and gathering real feedback before committing to landing-page / template work.
 
 ## Context
 
