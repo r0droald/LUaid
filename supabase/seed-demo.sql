@@ -252,7 +252,7 @@ BEGIN
   ON CONFLICT DO NOTHING;
 
   -- ============================================================
-  -- Donations (cash and in-kind)
+  -- Donations (14 total: cash and in-kind, spread across all 8 orgs)
   -- ============================================================
   INSERT INTO donations (id, event_id, organization_id, donor_name, donor_type, type, amount, date, notes) VALUES
     ('e0000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001',
@@ -278,8 +278,33 @@ BEGIN
      NULL, '2026-03-27', 'Hot meals for 3 days'),
     ('e0000000-0000-0000-0000-000000000008', 'a0000000-0000-0000-0000-000000000001',
      'b0000000-0000-0000-0000-000000000001', 'Manila Volunteers', 'organization', 'in_kind',
-     NULL, '2026-03-28', 'Clothing and blankets')
-  ON CONFLICT DO NOTHING;
+     NULL, '2026-03-28', 'Clothing and blankets'),
+    ('e0000000-0000-0000-0000-000000000009', 'a0000000-0000-0000-0000-000000000001',
+     'b0000000-0000-0000-0000-000000000005', 'Dr. Elena Aguilar', 'individual', 'cash',
+     75000.00, '2026-04-02', 'Donation from Baguio medical community'),
+    ('e0000000-0000-0000-0000-000000000010', 'a0000000-0000-0000-0000-000000000001',
+     'b0000000-0000-0000-0000-000000000006', 'San Fernando Rotarians', 'organization', 'in_kind',
+     NULL, '2026-04-05', 'Hygiene kits assembled at weekly meeting'),
+    ('e0000000-0000-0000-0000-000000000011', 'a0000000-0000-0000-0000-000000000001',
+     'b0000000-0000-0000-0000-000000000007', NULL, NULL, 'cash',
+     45000.00, '2026-04-08', 'Anonymous GCash donations via surf community'),
+    ('e0000000-0000-0000-0000-000000000012', 'a0000000-0000-0000-0000-000000000001',
+     'b0000000-0000-0000-0000-000000000008', 'LU Home Depot', 'organization', 'in_kind',
+     NULL, '2026-04-10', 'Tarps, rope, and basic construction materials'),
+    ('e0000000-0000-0000-0000-000000000013', 'a0000000-0000-0000-0000-000000000001',
+     'b0000000-0000-0000-0000-000000000005', 'Bataan Nurses Union', 'organization', 'in_kind',
+     NULL, '2026-04-14', 'Second shipment of basic medical supplies'),
+    ('e0000000-0000-0000-0000-000000000014', 'a0000000-0000-0000-0000-000000000001',
+     'b0000000-0000-0000-0000-000000000004', 'Ayala Foundation', 'organization', 'cash',
+     1200000.00, '2026-04-17', 'Major corporate grant earmarked for rebuilding phase')
+  ON CONFLICT (id) DO UPDATE SET
+    organization_id = EXCLUDED.organization_id,
+    donor_name = EXCLUDED.donor_name,
+    donor_type = EXCLUDED.donor_type,
+    type = EXCLUDED.type,
+    amount = EXCLUDED.amount,
+    date = EXCLUDED.date,
+    notes = EXCLUDED.notes;
 
   -- ============================================================
   -- Donation Categories (for in-kind)
@@ -288,11 +313,15 @@ BEGIN
     ('e0000000-0000-0000-0000-000000000006', cat_medical),
     ('e0000000-0000-0000-0000-000000000006', cat_hygiene),
     ('e0000000-0000-0000-0000-000000000007', cat_hot_meals),
-    ('e0000000-0000-0000-0000-000000000008', cat_clothing)
+    ('e0000000-0000-0000-0000-000000000008', cat_clothing),
+    ('e0000000-0000-0000-0000-000000000010', cat_hygiene),
+    ('e0000000-0000-0000-0000-000000000012', cat_shelter),
+    ('e0000000-0000-0000-0000-000000000012', cat_construction),
+    ('e0000000-0000-0000-0000-000000000013', cat_medical)
   ON CONFLICT DO NOTHING;
 
   -- ============================================================
-  -- Purchases
+  -- Purchases (8 total, spread across 6 orgs, recent dates)
   -- ============================================================
   INSERT INTO purchases (id, event_id, organization_id, cost, date, notes) VALUES
     ('f0000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001',
@@ -302,8 +331,20 @@ BEGIN
     ('f0000000-0000-0000-0000-000000000003', 'a0000000-0000-0000-0000-000000000001',
      'b0000000-0000-0000-0000-000000000004', 250000.00, '2026-03-29', 'Temporary shelter materials'),
     ('f0000000-0000-0000-0000-000000000004', 'a0000000-0000-0000-0000-000000000001',
-     'b0000000-0000-0000-0000-000000000002', 45000.00, '2026-03-30', 'Hygiene kits assembly')
-  ON CONFLICT DO NOTHING;
+     'b0000000-0000-0000-0000-000000000002', 45000.00, '2026-03-30', 'Hygiene kits assembly'),
+    ('f0000000-0000-0000-0000-000000000005', 'a0000000-0000-0000-0000-000000000001',
+     'b0000000-0000-0000-0000-000000000005', 95000.00, '2026-04-04', 'Medical supplies restock (IV fluids, wound care)'),
+    ('f0000000-0000-0000-0000-000000000006', 'a0000000-0000-0000-0000-000000000001',
+     'b0000000-0000-0000-0000-000000000006', 60000.00, '2026-04-09', 'Water filtration units for 4 barangays'),
+    ('f0000000-0000-0000-0000-000000000007', 'a0000000-0000-0000-0000-000000000001',
+     'b0000000-0000-0000-0000-000000000008', 180000.00, '2026-04-13', 'Lumber and roofing materials for rebuilds'),
+    ('f0000000-0000-0000-0000-000000000008', 'a0000000-0000-0000-0000-000000000001',
+     'b0000000-0000-0000-0000-000000000003', 72000.00, '2026-04-17', 'Rice, canned goods for next 5 days')
+  ON CONFLICT (id) DO UPDATE SET
+    organization_id = EXCLUDED.organization_id,
+    cost = EXCLUDED.cost,
+    date = EXCLUDED.date,
+    notes = EXCLUDED.notes;
 
   -- ============================================================
   -- Purchase Categories
@@ -313,7 +354,14 @@ BEGIN
     ('f0000000-0000-0000-0000-000000000002', cat_hot_meals),
     ('f0000000-0000-0000-0000-000000000003', cat_shelter),
     ('f0000000-0000-0000-0000-000000000003', cat_construction),
-    ('f0000000-0000-0000-0000-000000000004', cat_hygiene)
+    ('f0000000-0000-0000-0000-000000000004', cat_hygiene),
+    ('f0000000-0000-0000-0000-000000000005', cat_medical),
+    ('f0000000-0000-0000-0000-000000000006', cat_filtration),
+    ('f0000000-0000-0000-0000-000000000006', cat_water),
+    ('f0000000-0000-0000-0000-000000000007', cat_construction),
+    ('f0000000-0000-0000-0000-000000000007', cat_shelter),
+    ('f0000000-0000-0000-0000-000000000008', cat_hot_meals),
+    ('f0000000-0000-0000-0000-000000000008', cat_canned)
   ON CONFLICT DO NOTHING;
 
 END $$;
