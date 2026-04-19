@@ -6,7 +6,7 @@ const LOCALES = ["en", "fil", "ilo"] as const;
 
 for (const locale of LOCALES) {
   test(`relief map page renders in ${locale}`, async ({ page }) => {
-    await page.goto(`/${locale}`);
+    await page.goto(`/demo/${locale}`);
 
     // Header brand
     await expect(page.locator("text=Kapwa Help")).toBeVisible();
@@ -31,7 +31,7 @@ for (const locale of LOCALES) {
 
 for (const locale of LOCALES) {
   test(`dashboard page renders in ${locale}`, async ({ page }) => {
-    await page.goto(`/${locale}/dashboard`);
+    await page.goto(`/demo/${locale}/dashboard`);
 
     // Header brand
     await expect(page.locator("text=Kapwa Help")).toBeVisible();
@@ -51,7 +51,7 @@ for (const locale of LOCALES) {
 
 for (const locale of LOCALES) {
   test(`report page renders in ${locale}`, async ({ page }) => {
-    await page.goto(`/${locale}/report`);
+    await page.goto(`/demo/${locale}/report`);
     await expect(page.locator("text=Kapwa Help")).toBeVisible();
     await expect(page.locator("h1")).toBeVisible();
     await page.screenshot({
@@ -64,50 +64,62 @@ for (const locale of LOCALES) {
 // ── Report page hazard form ────────────────────────────────────────
 
 test("report page shows hazard form when selected", async ({ page }) => {
-  await page.goto("/en/report");
+  await page.goto("/demo/en/report");
   await page.getByRole("button", { name: "Hazard" }).click();
   await expect(page.locator("#hazard-description")).toBeVisible();
 });
 
 // ── Navigation smoke tests ──────────────────────────────────────────
 
-test("root redirects to /en", async ({ page }) => {
+test("root renders the landing page", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveURL(/\/en$/);
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  await expect(page.getByRole("link", { name: /view live demo/i })).toBeVisible();
 });
 
-test("invalid locale redirects to /en", async ({ page }) => {
-  await page.goto("/xyz");
-  await expect(page).toHaveURL(/\/en$/);
+test("old /:locale path redirects to /demo/:locale", async ({ page }) => {
+  await page.goto("/en");
+  await expect(page).toHaveURL(/\/demo\/en$/);
 });
 
-test("legacy /transparency redirects to /dashboard", async ({ page }) => {
+test("old /:locale/dashboard redirects to /demo/:locale/dashboard", async ({ page }) => {
+  await page.goto("/en/dashboard");
+  await expect(page).toHaveURL(/\/demo\/en\/dashboard$/);
+});
+
+test("old /:locale/report redirects to /demo/:locale/report", async ({ page }) => {
+  await page.goto("/en/report");
+  await expect(page).toHaveURL(/\/demo\/en\/report$/);
+});
+
+test("legacy /:locale/transparency redirects to /demo/:locale/dashboard", async ({ page }) => {
   await page.goto("/en/transparency");
-  await expect(page).toHaveURL(/\/en\/dashboard$/);
+  await expect(page).toHaveURL(/\/demo\/en\/dashboard$/);
 });
 
 test("locale switcher changes URL", async ({ page }) => {
-  await page.goto("/en");
+  await page.goto("/demo/en");
   const select = page.locator("header select");
   await expect(select).toBeVisible();
   await select.selectOption("fil");
-  await expect(page).toHaveURL(/\/fil$/);
+  await expect(page).toHaveURL(/\/demo\/fil$/);
   await expect(select).toHaveValue("fil");
 });
 
 test("nav links navigate between pages", async ({ page }) => {
-  await page.goto("/en");
+  await page.goto("/demo/en");
 
   // Click Dashboard nav link
   await page.locator("nav").getByText(/dashboard/i).click();
-  await expect(page).toHaveURL(/\/en\/dashboard$/);
+  await expect(page).toHaveURL(/\/demo\/en\/dashboard$/);
   await expect(page.locator("h1")).toBeVisible();
 });
 
 test("mobile hamburger menu navigates between pages", async ({ page }) => {
   // Set mobile viewport
   await page.setViewportSize({ width: 375, height: 667 });
-  await page.goto("/en");
+  await page.goto("/demo/en");
 
   // Desktop nav should be hidden
   await expect(page.locator("nav")).toBeHidden();
@@ -119,7 +131,7 @@ test("mobile hamburger menu navigates between pages", async ({ page }) => {
   // Open menu and click Dashboard
   await menuButton.click();
   await page.getByTestId("mobile-nav").getByText(/dashboard/i).click();
-  await expect(page).toHaveURL(/\/en\/dashboard$/);
+  await expect(page).toHaveURL(/\/demo\/en\/dashboard$/);
 
   // Menu should close after navigation
   await expect(page.getByTestId("mobile-nav")).toBeHidden();
