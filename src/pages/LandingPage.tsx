@@ -83,6 +83,35 @@ export default function LandingPage() {
           </Link>
         </div>
       </section>
+
+      {/* ---------- STORY ---------- */}
+      <section id="story" className="bg-landing-ink px-6 py-20 text-landing-cream md:px-10 md:py-28">
+        <div className="mx-auto grid max-w-[1100px] gap-10 md:grid-cols-[1fr_2fr] md:gap-14">
+          <div>
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.35em] text-landing-sunset">
+              The Story
+            </p>
+            <h2 className="font-logo text-4xl leading-[0.95] md:text-5xl">
+              Born during <span className="text-landing-sunset">Emong.</span>
+            </h2>
+          </div>
+
+          <div className="landing-story-body space-y-4 text-[15px] leading-[1.7] text-landing-cream/80">
+            <p>
+              When Typhoon Emong hit La Union in 2025, volunteers self-organized across municipalities to distribute meals, relief goods, drinking water, and medical supplies. Coordination happened over group chats. Tracking happened in spreadsheets — when it happened at all.
+            </p>
+            <blockquote
+              className="my-6 border-l-[3px] border-landing-sunset pl-4 text-[22px] italic leading-snug text-landing-cream"
+              style={{ fontFamily: "'Instrument Serif', serif" }}
+            >
+              "The next disaster response should start where this one left off."
+            </blockquote>
+            <p>
+              Kapwa Help was born out of that experience: a transparency and coordination tool built by the people who were on the ground. We publish this software openly in the hope that it's useful for disaster relief operations in your community too.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
