@@ -201,6 +201,56 @@ export default function LandingPage() {
           </ul>
         </div>
       </section>
+
+      {/* ---------- GET INVOLVED ---------- */}
+      <section
+        id="get-involved"
+        className="relative overflow-hidden bg-landing-sunset px-6 py-20 text-landing-ink md:px-10 md:py-28"
+      >
+        <span
+          className="landing-riso"
+          style={{
+            top: "-60px",
+            right: "-60px",
+            width: "240px",
+            height: "240px",
+            background: "var(--color-primary)",
+            opacity: 0.9,
+          }}
+          aria-hidden="true"
+        />
+        <span className="landing-grain absolute inset-0" aria-hidden="true" />
+
+        <div className="relative mx-auto max-w-[700px]">
+          <p className="mb-3 text-[10px] font-extrabold uppercase tracking-[0.35em]">
+            Get Involved
+          </p>
+          <h2 className="mb-4 font-logo text-4xl leading-[0.95] md:text-[58px]">
+            Every skill set{" "}
+            <span
+              className="italic"
+              style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}
+            >
+              has a place.
+            </span>
+          </h2>
+          <p className="mb-3 max-w-[46ch] text-base leading-relaxed">
+            Kapwa Help is volunteer-driven. We welcome help from anyone — developers, designers, writers, translators, relief coordinators, or anyone who wants to contribute.
+          </p>
+          <p
+            className="mb-7 text-[19px] italic text-landing-sunset-deep"
+            style={{ fontFamily: "'Instrument Serif', serif" }}
+          >
+            — Naimbag nga aldaw. Come join us.
+          </p>
+          <a
+            href="mailto:contact@kapwahelp.org"
+            className="inline-block rounded-md bg-landing-ink px-5 py-3 text-sm font-semibold text-landing-cream hover:opacity-90"
+          >
+            Get in Touch →
+          </a>
+        </div>
+      </section>
     </div>
   );
 }
