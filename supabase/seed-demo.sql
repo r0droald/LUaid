@@ -319,18 +319,35 @@ BEGIN
 END $$;
 
 -- ============================================================
--- Hazards
+-- Hazards (6 hazards: 4 active + 2 resolved; 4 with photos, 2 without)
 -- ============================================================
-INSERT INTO hazards (id, event_id, description, photo_url, latitude, longitude, status, reported_by) VALUES
+INSERT INTO hazards (id, event_id, description, photo_url, latitude, longitude, status, reported_by, contact_phone) VALUES
   ('10000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001',
-   'Major flooding along Bauang River — water level 2m above normal', '/demo-hazards/flooding.jpg', 16.5412, 120.3301, 'active', 'MDRRMO Bauang'),
+   'Major flooding along Bauang River — water level 2m above normal, families evacuating to higher ground',
+   '/demo-hazards/flooding.jpg', 16.5412, 120.3401, 'active', 'MDRRMO Bauang', '09175551111'),
   ('10000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000001',
-   'Landslide blocking Naguilian Road km 14', '/demo-hazards/landslide.jpg', 16.5189, 120.3956, 'active', 'PNP Naguilian'),
+   'Landslide blocking Naguilian Road km 14 — debris extends approx 30m, heavy equipment needed',
+   '/demo-hazards/landslide.jpg', 16.5189, 120.3956, 'active', 'PNP Naguilian', '09175552222'),
   ('10000000-0000-0000-0000-000000000003', 'a0000000-0000-0000-0000-000000000001',
-   'Downed power lines near Bacnotan market', '/demo-hazards/power-lines.jpg', 16.7289, 120.3512, 'active', NULL),
+   'Downed power lines near Bacnotan market — keep clear, area not yet secured',
+   '/demo-hazards/power-lines.jpg', 16.7289, 120.3512, 'active', NULL, NULL),
   ('10000000-0000-0000-0000-000000000004', 'a0000000-0000-0000-0000-000000000001',
-   'Bridge weakened at San Gabriel crossing — do not use heavy vehicles', '/demo-hazards/bridge.jpg', 16.6945, 120.4123, 'resolved', 'DPWH La Union')
-ON CONFLICT (id) DO UPDATE SET photo_url = EXCLUDED.photo_url;
+   'Storm damage to San Fernando elementary school roof — classrooms unsafe, avoid north wing',
+   NULL, 16.6245, 120.3388, 'active', 'Principal Tanoza', '09175553333'),
+  ('10000000-0000-0000-0000-000000000005', 'a0000000-0000-0000-0000-000000000001',
+   'Bridge weakened at San Gabriel crossing — do not use heavy vehicles (cleared for light traffic 04-12)',
+   '/demo-hazards/bridge.jpg', 16.6945, 120.4123, 'resolved', 'DPWH La Union', '09175554444'),
+  ('10000000-0000-0000-0000-000000000006', 'a0000000-0000-0000-0000-000000000001',
+   'Debris blocking access road near Aringay market — cleared by community volunteers',
+   NULL, 16.4023, 120.3612, 'resolved', NULL, NULL)
+ON CONFLICT (id) DO UPDATE SET
+  description = EXCLUDED.description,
+  photo_url = EXCLUDED.photo_url,
+  latitude = EXCLUDED.latitude,
+  longitude = EXCLUDED.longitude,
+  status = EXCLUDED.status,
+  reported_by = EXCLUDED.reported_by,
+  contact_phone = EXCLUDED.contact_phone;
 
 -- ============================================================
 -- Deployments (for confirmed needs)
