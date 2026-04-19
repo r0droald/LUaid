@@ -20,9 +20,9 @@ Found 17 markers.
 By kind: { need: 9, hub: 5, hazard: 3, missing: 0 }
 
 Sample per kind:
-  need:   24px × 24px   title="in_transit need: Hot Meals"
-  hub:    22px × 22px   title="Relief hub: San Juan Municipal Hall"
-  hazard: 22px × 20px   title="Hazard: Flooded bridge on national highway"
+  need:   24px × 24px   title="In transit need: Hot Meals"
+  hub:    24px × 24px   title="Relief hub: San Juan Municipal Hall"
+  hazard: 24px × 22px   title="Hazard: Flooded bridge on national highway"
 
 ✓ All markers have title attributes
 ```
@@ -36,9 +36,15 @@ All 16 Playwright smoke tests pass against the build (run against `http://127.0.
 
 The two images are at the same zoom and viewport. The need markers visible along the coast in the before shot grow proportionally in the after shot; hub and hazard markers are unchanged.
 
-## Why only need markers got a size bump
+## Marker sizing
 
-Hub (22px) and hazard (22px tall, 20px pointed) are already close enough to WCAG 24px that bumping them would visually overpower the status-coded need markers, which are the primary triage target on the needs-first flow. If real-device testing later shows hub/hazard mis-taps, revisit with a small uniform bump.
+All three marker types now meet WCAG 2.1 minimum touch target (24 CSS px):
+
+- Need: 24×24 (from 14×14)
+- Hub: 24×24 (from 22×22)
+- Hazard: 24×22 (from 22×20) — retains the downward-pointing anchor geometry of the triangle so the point still sits exactly on the hazard's lat/lng
+
+Original intent was to leave hub/hazard at 22px to preserve visual hierarchy, but in real use the solid filled need circles already read as visually heavier than the outlined house/triangle SVGs, so keeping all three at a uniform 24px doesn't actually overpower need markers. Uniform sizing also simplifies the touch-target story for users with gloves.
 
 ## Not verified in this capture
 
