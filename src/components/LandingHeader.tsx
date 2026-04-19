@@ -2,31 +2,34 @@ import { Link } from "react-router";
 
 export default function LandingHeader() {
   return (
-    <header className="border-b border-neutral-400/10 bg-secondary/40 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <header className="bg-landing-cream">
+      <div className="mx-auto flex max-w-7xl items-center justify-between border-b-2 border-landing-ink px-6 pt-3 pb-6 md:px-10">
         <Link
           to="/"
-          className="flex items-center gap-2 font-logo text-xl font-bold text-white hover:text-neutral-100"
+          className="flex items-center gap-2.5 font-logo text-2xl tracking-tight text-landing-ink hover:opacity-90"
         >
           <img
             src="/icons/kapwahelp_v1.svg"
             alt=""
             aria-hidden="true"
-            className="h-8 w-8"
+            className="h-9 w-9"
           />
           Kapwa Help
         </Link>
 
-        <nav className="flex items-center gap-5 text-sm">
-          <a href="#story" className="hidden text-neutral-100 hover:text-neutral-50 sm:inline">
+        <nav className="flex items-center gap-6 text-[13px] font-medium text-landing-ink">
+          <a href="#story" className="hidden hover:opacity-70 sm:inline">
             The Story
           </a>
-          <a href="#get-involved" className="hidden text-neutral-100 hover:text-neutral-50 sm:inline">
+          <a href="#what-it-does" className="hidden hover:opacity-70 sm:inline">
+            What it does
+          </a>
+          <a href="#get-involved" className="hidden hover:opacity-70 sm:inline">
             Get Involved
           </a>
           <Link
             to="/demo/en"
-            className="rounded-lg bg-primary px-4 py-2 font-medium text-white shadow-[0_0_12px_rgba(14,154,167,0.3)] hover:bg-primary/80 transition-all"
+            className="rounded-md bg-landing-ink px-4 py-2 font-semibold text-landing-cream hover:opacity-90"
           >
             View Demo →
           </Link>
