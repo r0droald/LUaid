@@ -50,8 +50,8 @@ export default function Header() {
   const showInvite = AUTH_MODE === 'strict' && isAdmin;
 
   const handleLocaleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const subPath = locale ? location.pathname.replace(`/${locale}`, "") : "";
-    navigate(`/${e.target.value}${subPath}`);
+    const subPath = locale ? location.pathname.replace(`/demo/${locale}`, "") : "";
+    navigate(`/demo/${e.target.value}${subPath}`);
   };
 
   const navItems = [
