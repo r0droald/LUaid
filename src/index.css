@@ -45,6 +45,22 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-base);
 }
 
+.leaflet-tooltip.kapwa-marker-tooltip {
+  background: var(--color-secondary);
+  color: var(--color-neutral-100);
+  border: 1px solid rgba(154, 209, 212, 0.2);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.leaflet-tooltip.kapwa-marker-tooltip::before { display: none; }
+
 .leaflet-container {
   height: 100%;
 }
