@@ -9,13 +9,13 @@ export default function AuthCallbackPage() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) {
-        navigate('/', { replace: true });
+        navigate('/demo/en', { replace: true });
       } else {
         const { data: { subscription } } =
           supabase.auth.onAuthStateChange((_evt, session) => {
             if (session) {
               subscription.unsubscribe();
-              navigate('/', { replace: true });
+              navigate('/demo/en', { replace: true });
             }
           });
         setTimeout(() => {
