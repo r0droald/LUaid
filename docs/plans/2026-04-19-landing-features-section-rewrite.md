@@ -85,8 +85,8 @@ Per `.claude/rules/verification.md`: running `npm run verify` after landing-page
 - Click the GitHub CTA, confirm it opens in a new tab.
 - Mobile layout: the 2×2 grid collapses to single column; the closer should still look deliberate and not squished.
 
-## Open Questions
+## Resolved Decisions
 
-1. **i18n:** New copy strings will need keys in `public/locales/en/*.json` and machine-translated via `npm run translate` for `fil`/`ilo`. Confirm which namespace (likely `landing.json`) and whether the rewrite should happen in one commit with all three locales, or English-first then translate.
-2. **Section anchor id:** Keep `id="what-it-does"` (stable, but now a misnomer) or rename to `id="features"` and add a redirect/alias? Per project rule: "Never rename a public URL without a redirect in the same commit." The anchor isn't a top-level URL, but header nav links may point to it. Recommend: keep `id="what-it-does"` for now to avoid breaking any in-page nav, update header nav label to "Features" if desired.
-3. **Title styling:** Single color ("Built for the field.") or keep a two-tone italic sunset treatment like the current title? Lean: monochrome, since the phrase is already short and punchy.
+1. **i18n:** English-only for the landing page. No `fil`/`ilo` translations for these strings.
+2. **Section anchor id:** Rename `id="what-it-does"` → `id="features"`. Update any in-page nav links in `LandingHeader.tsx` accordingly. The anchor is in-page only (not an external URL), so the public-URL redirect rule doesn't apply.
+3. **Title styling:** Monochrome. "Built for the field." in `font-logo`, no italic sunset phrase.
