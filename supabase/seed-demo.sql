@@ -19,14 +19,25 @@ ON CONFLICT (slug) DO NOTHING;
 -- ============================================================
 INSERT INTO organizations (id, event_id, name, description, contact_info) VALUES
   ('b0000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001',
-   'Citizens for La Union', 'Local civic org coordinating donations', 'info@citizensforlu.ph'),
+   'Citizens for La Union', 'Local civic org coordinating donations and volunteer dispatch', 'info@citizensforlu.ph'),
   ('b0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000001',
-   'Buhaki LU Chapter', 'Volunteer rescue and relief group', NULL),
+   'Buhaki LU Chapter', 'Volunteer rescue and relief group — boat and 4x4 access', 'buhaki.launion@gmail.com'),
   ('b0000000-0000-0000-0000-000000000003', 'a0000000-0000-0000-0000-000000000001',
-   'Art Relief Mobile Kitchen', 'Hot meals for displaced communities', 'artrelief@gmail.com'),
+   'Art Relief Mobile Kitchen', 'Hot meals program for displaced communities', 'artrelief@gmail.com'),
   ('b0000000-0000-0000-0000-000000000004', 'a0000000-0000-0000-0000-000000000001',
-   'LU Disaster Response', 'Provincial government disaster response unit', NULL)
-ON CONFLICT DO NOTHING;
+   'LU Provincial Disaster Response', 'Provincial government disaster response unit (PDRRMO)', 'pdrrmo@launion.gov.ph'),
+  ('b0000000-0000-0000-0000-000000000005', 'a0000000-0000-0000-0000-000000000001',
+   'Ilocos Medical Volunteers', 'Volunteer nurses and doctors coordinating health outreach', 'ilocosmed@gmail.com'),
+  ('b0000000-0000-0000-0000-000000000006', 'a0000000-0000-0000-0000-000000000001',
+   'San Fernando Rotary Club', 'Civic club funding hygiene kits and potable water', 'rotary.sanfernando@gmail.com'),
+  ('b0000000-0000-0000-0000-000000000007', 'a0000000-0000-0000-0000-000000000001',
+   'La Union Surf Association', 'Local surfer-led community supporting coastal barangays', 'lusurf@gmail.com'),
+  ('b0000000-0000-0000-0000-000000000008', 'a0000000-0000-0000-0000-000000000001',
+   'Bayanihan Builders LU', 'Construction volunteers rebuilding homes and shelters', NULL)
+ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  description = EXCLUDED.description,
+  contact_info = EXCLUDED.contact_info;
 
 -- ============================================================
 -- Deployment Hubs (independent from orgs, with lat/lng)
