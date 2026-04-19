@@ -1,0 +1,66 @@
+/* Landing-only styles. Imported by src/pages/LandingPage.tsx so Vite
+   code-splits this (and the Google Font fetches it triggers) into the
+   landing chunk. Do NOT import from any /demo/* route. */
+
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap");
+
+/* ---------- Grain / noise overlay ---------- */
+.landing-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.35'/></svg>");
+  mix-blend-mode: multiply;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ---------- Riso-style circle shape ---------- */
+.landing-riso {
+  position: absolute;
+  border-radius: 9999px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* ---------- Live pulse dot (used on feature #1) ---------- */
+@keyframes landing-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(201, 59, 18, 0.25); }
+  50% { box-shadow: 0 0 0 7px rgba(201, 59, 18, 0); }
+}
+.landing-pulse-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--color-landing-live);
+  border-radius: 9999px;
+  animation: landing-pulse 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-pulse-dot { animation: none; box-shadow: 0 0 0 3px rgba(201, 59, 18, 0.25); }
+}
+
+/* ---------- Tilted screenshot frame with hard offset shadow ---------- */
+.landing-screenshot-frame {
+  transform: rotate(1.5deg);
+  box-shadow: 12px 12px 0 var(--color-landing-ink);
+}
+@media (max-width: 768px) {
+  /* On mobile the tilt reads as broken. Flatten. */
+  .landing-screenshot-frame {
+    transform: none;
+    box-shadow: 4px 4px 0 var(--color-landing-ink);
+  }
+}
+
+/* ---------- Hand-stamped label ---------- */
+.landing-stamp {
+  transform: rotate(-2.5deg);
+}
+
+/* ---------- Dropcap for story opening paragraph ---------- */
+.landing-story-body > p:first-of-type::first-letter {
+  font-family: var(--font-logo);
+  font-size: 68px;
+  float: left;
+  line-height: 0.85;
+  padding-right: 10px;
+  padding-top: 6px;
+  color: var(--color-landing-sunset);
+}
