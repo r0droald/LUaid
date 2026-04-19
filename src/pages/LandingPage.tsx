@@ -44,7 +44,7 @@ export default function LandingPage() {
             <h1 className="font-logo text-[52px] leading-[0.95] tracking-tight text-landing-ink md:text-[72px]">
               Built on the ground.{" "}
               <span className="font-serif italic tracking-normal text-landing-sunset" style={{ fontFamily: "'Instrument Serif', serif" }}>
-                Shared with everyone.
+                Shared with everyone
               </span>
             </h1>
             <p className="mt-5 max-w-[46ch] text-[17px] leading-relaxed text-landing-ink">
@@ -98,7 +98,7 @@ export default function LandingPage() {
                 className="italic text-landing-sunset"
                 style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}
               >
-                Emong.
+                Emong
               </span>
             </h2>
           </div>
@@ -127,7 +127,7 @@ export default function LandingPage() {
             Features
           </p>
           <h2 className="mb-10 max-w-[16ch] font-logo text-4xl leading-[0.95] md:text-[56px]">
-            Built for the field.
+            Built for the field
           </h2>
 
           <ul className="grid grid-cols-1 border-t-2 border-landing-ink md:grid-cols-2">
@@ -143,7 +143,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
-                View live needs and hazards.
+                View live needs and hazards
               </h3>
               <p className="text-sm leading-relaxed text-landing-ink/75">
                 See what's happening on the ground, pinned and updated as reports come in.
@@ -156,7 +156,7 @@ export default function LandingPage() {
                 02 / TRANSPARENCY DASHBOARD
               </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
-                Know what's been given, and to whom.
+                Know what's been given, and to whom
               </h3>
               <p className="text-sm leading-relaxed text-landing-ink/75">
                 Donations, beneficiaries, volunteer hours, and deployments, all in one place, all open to the public.
@@ -169,7 +169,7 @@ export default function LandingPage() {
                 03 / OFFLINE FIRST
               </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
-                Works without internet.
+                Works without internet
               </h3>
               <p className="text-sm leading-relaxed text-landing-ink/75">
                 Submit reports when the signal's out; they'll sync when you're back online.
@@ -182,10 +182,10 @@ export default function LandingPage() {
                 04 / MULTILINGUAL
               </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
-                Speak to your community in their language.
+                Built to speak your language
               </h3>
               <p className="text-sm leading-relaxed text-landing-ink/75">
-                English, Filipino, and Ilocano out of the box. One tap to switch. More languages welcome.
+                Multilingual support is built in. Ships with English, Filipino, and Ilocano; add your own translations when you deploy.
               </p>
             </li>
           </ul>
@@ -196,7 +196,7 @@ export default function LandingPage() {
               05 / OPEN SOURCE
             </p>
             <h3 className="mx-auto mb-4 max-w-[32ch] font-logo text-[28px] leading-tight text-landing-ink md:text-[40px]">
-              Take it. Run it for your community.
+              Take it. Run it for your community
             </h3>
             <p className="mx-auto mb-6 max-w-[82ch] text-sm leading-relaxed text-landing-ink/75 md:text-base">
               Kapwa Help is free and open source. It runs on free-tier tools, so a disaster response doesn't stall when a budget runs out. Fork the repo, deploy it for your own community, or help us improve it.
@@ -242,7 +242,7 @@ export default function LandingPage() {
               className="italic"
               style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}
             >
-              has a place.
+              has a place
             </span>
           </h2>
           <p className="mb-3 max-w-[46ch] text-base leading-relaxed">
