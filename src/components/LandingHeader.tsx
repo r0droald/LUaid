@@ -24,8 +24,8 @@ export default function LandingHeader() {
           <a href="#story" className="hidden hover:opacity-70 sm:inline">
             The Story
           </a>
-          <a href="#what-it-does" className="hidden hover:opacity-70 sm:inline">
-            What it does
+          <a href="#features" className="hidden hover:opacity-70 sm:inline">
+            Features
           </a>
           <a href="#get-involved" className="hidden hover:opacity-70 sm:inline">
             Get Involved

@@ -120,28 +120,22 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ---------- WHAT IT DOES ---------- */}
-      <section id="what-it-does" className="bg-landing-cream px-6 py-20 md:px-10 md:py-28">
+      {/* ---------- FEATURES ---------- */}
+      <section id="features" className="bg-landing-cream px-6 py-20 md:px-10 md:py-28">
         <div className="mx-auto max-w-[1100px]">
           <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.35em] text-landing-sunset">
-            What it does
+            Features
           </p>
           <h2 className="mb-10 max-w-[16ch] font-logo text-4xl leading-[0.95] md:text-[56px]">
-            Five things,{" "}
-            <span
-              className="italic text-landing-sunset"
-              style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}
-            >
-              done simply.
-            </span>
+            Built for the field.
           </h2>
 
           <ul className="grid grid-cols-1 border-t-2 border-landing-ink md:grid-cols-2">
-            {/* 01 — Live map */}
+            {/* 01 — Relief Map */}
             <li className="border-b-2 border-landing-ink py-6 md:border-r-2 md:pr-7">
               <div className="mb-2 flex items-center gap-3">
                 <p className="font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
-                  01 / MAP
+                  01 / RELIEF MAP
                 </p>
                 <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-landing-live">
                   <span className="landing-pulse-dot" aria-hidden="true" />
@@ -149,17 +143,17 @@ export default function LandingPage() {
                 </div>
               </div>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
-                See where aid is going, right now.
+                View live needs and hazards.
               </h3>
               <p className="text-sm leading-relaxed text-landing-ink/75">
-                Every relief delivery, pinned to the map of La Union, updated as it happens.
+                See what's happening on the ground, pinned and updated as reports come in.
               </p>
             </li>
 
-            {/* 02 — Dashboard */}
+            {/* 02 — Transparency Dashboard */}
             <li className="border-b-2 border-landing-ink py-6 md:pl-7">
               <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
-                02 / DASHBOARD
+                02 / TRANSPARENCY DASHBOARD
               </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
                 Know what's been given, and to whom.
@@ -169,45 +163,53 @@ export default function LandingPage() {
               </p>
             </li>
 
-            {/* 03 — Signal */}
+            {/* 03 — Offline First */}
             <li className="border-b-2 border-landing-ink py-6 md:border-r-2 md:pr-7">
               <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
-                03 / SIGNAL
+                03 / OFFLINE FIRST
               </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
                 Works without internet.
               </h3>
               <p className="text-sm leading-relaxed text-landing-ink/75">
-                Built for the field. Submit reports when the signal's out; they'll sync when you're back online.
+                Submit reports when the signal's out; they'll sync when you're back online.
               </p>
             </li>
 
-            {/* 04 — Languages */}
+            {/* 04 — Multilingual */}
             <li className="border-b-2 border-landing-ink py-6 md:pl-7">
               <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
-                04 / LANGUAGE
+                04 / MULTILINGUAL
               </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
-                English · Filipino · Ilocano.
+                Speak to your community in their language.
               </h3>
               <p className="text-sm leading-relaxed text-landing-ink/75">
-                Speak to your community in their language. One tap to switch. More languages welcome.
-              </p>
-            </li>
-
-            {/* 05 — No dependencies (full-width) */}
-            <li className="border-b-2 border-landing-ink py-6 md:col-span-2">
-              <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
-                05 / NO DEPENDENCIES
-              </p>
-              <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
-                Runs on free tools. No grant money required.
-              </h3>
-              <p className="text-sm leading-relaxed text-landing-ink/75">
-                Built so a typhoon response doesn't stall when a budget runs out.
+                English, Filipino, and Ilocano out of the box. One tap to switch. More languages welcome.
               </p>
             </li>
           </ul>
+
+          {/* 05 — Open Source closer (full-width) */}
+          <div className="border-b-2 border-landing-ink py-10 md:py-14">
+            <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
+              05 / OPEN SOURCE
+            </p>
+            <h3 className="mb-4 max-w-[18ch] font-logo text-[28px] leading-tight text-landing-ink md:text-[40px]">
+              Take it. Run it for your community.
+            </h3>
+            <p className="mb-6 max-w-[62ch] text-sm leading-relaxed text-landing-ink/75 md:text-base">
+              Kapwa Help is free and open source. It runs on free-tier tools, so a disaster response doesn't stall when a budget runs out. Fork the repo, deploy it for your own community, or help us improve it.
+            </p>
+            <a
+              href="https://github.com/kapwa-help/kapwa-help"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-md bg-landing-sunset px-5 py-3 text-sm font-semibold text-landing-cream hover:opacity-90 md:text-base"
+            >
+              View on GitHub →
+            </a>
+          </div>
         </div>
       </section>
 

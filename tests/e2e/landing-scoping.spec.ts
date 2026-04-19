@@ -54,7 +54,7 @@ test("landing page renders on mobile viewport without horizontal overflow", asyn
 test("landing anchor links resolve to real sections", async ({ page }) => {
   await page.goto("/");
 
-  for (const id of ["story", "what-it-does", "get-involved"]) {
+  for (const id of ["story", "features", "get-involved"]) {
     const target = page.locator(`#${id}`);
     await expect(target, `#${id} section should exist`).toHaveCount(1);
   }

@@ -103,7 +103,7 @@ test("root renders the landing page", async ({ page }) => {
 
   // Features section presence (live map is #1)
   await expect(
-    page.getByRole("heading", { level: 3, name: /see where aid is going/i }),
+    page.getByRole("heading", { level: 3, name: /view live needs and hazards/i }),
   ).toBeVisible();
 
   // CTA section
