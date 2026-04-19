@@ -49,7 +49,7 @@ export default function LandingPage() {
               </span>
             </h1>
             <p className="mt-5 max-w-[46ch] text-[17px] leading-relaxed text-landing-ink">
-              An open-source coordination tool for disaster relief — born during Typhoon Emong, built by the volunteers who were there.
+              An open-source coordination tool for disaster relief, born during Typhoon Emong, built by the volunteers who were there.
             </p>
             <p
               className="mt-5 text-[19px] italic text-landing-sunset-deep"
@@ -98,7 +98,7 @@ export default function LandingPage() {
 
           <div className="landing-story-body space-y-4 text-[15px] leading-[1.7] text-landing-cream/80">
             <p>
-              When Typhoon Emong hit La Union in 2025, volunteers self-organized across municipalities to distribute meals, relief goods, drinking water, and medical supplies. Coordination happened over group chats. Tracking happened in spreadsheets — when it happened at all.
+              When Typhoon Emong hit La Union in 2025, volunteers self-organized across municipalities to distribute meals, relief goods, drinking water, and medical supplies. Coordination happened over group chats. Tracking happened in spreadsheets, when it happened at all.
             </p>
             <blockquote
               className="my-6 border-l-[3px] border-landing-sunset pl-4 text-[22px] italic leading-snug text-landing-cream"
@@ -140,7 +140,7 @@ export default function LandingPage() {
                 01 / MAP
               </p>
               <h3 className="mb-1.5 font-logo text-[22px] leading-tight text-landing-ink">
-                See where aid is going — right now.
+                See where aid is going, right now.
               </h3>
               <p className="text-sm leading-relaxed text-landing-ink/75">
                 Every relief delivery, pinned to the map of La Union, updated as it happens.
@@ -156,7 +156,7 @@ export default function LandingPage() {
                 Know what's been given, and to whom.
               </h3>
               <p className="text-sm leading-relaxed text-landing-ink/75">
-                Donations, beneficiaries, volunteer hours, and deployments — all in one place, all open to the public.
+                Donations, beneficiaries, volunteer hours, and deployments, all in one place, all open to the public.
               </p>
             </li>
 
@@ -182,7 +182,7 @@ export default function LandingPage() {
                 English · Filipino · Ilocano.
               </h3>
               <p className="text-sm leading-relaxed text-landing-ink/75">
-                Speak to your community in their language. One tap to switch — more languages welcome.
+                Speak to your community in their language. One tap to switch. More languages welcome.
               </p>
             </li>
 
@@ -235,7 +235,7 @@ export default function LandingPage() {
             </span>
           </h2>
           <p className="mb-3 max-w-[46ch] text-base leading-relaxed">
-            Kapwa Help is volunteer-driven. We welcome help from anyone — developers, designers, writers, translators, relief coordinators, or anyone who wants to contribute.
+            Kapwa Help is volunteer-driven. We welcome help from anyone: developers, designers, writers, translators, relief coordinators, or anyone who wants to contribute.
           </p>
           <p
             className="mb-7 text-[19px] italic text-landing-sunset-deep"
