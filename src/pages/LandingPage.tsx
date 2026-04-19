@@ -191,21 +191,21 @@ export default function LandingPage() {
           </ul>
 
           {/* 05 — Open Source closer (full-width) */}
-          <div className="border-b-2 border-landing-ink py-10 md:py-14">
+          <div className="border-b-2 border-landing-ink py-10 text-center md:py-14">
             <p className="mb-2 font-logo text-[11px] tracking-[0.2em] text-landing-sunset">
               05 / OPEN SOURCE
             </p>
-            <h3 className="mb-4 max-w-[18ch] font-logo text-[28px] leading-tight text-landing-ink md:text-[40px]">
+            <h3 className="mx-auto mb-4 max-w-[18ch] font-logo text-[28px] leading-tight text-landing-ink md:text-[40px]">
               Take it. Run it for your community.
             </h3>
-            <p className="mb-6 max-w-[62ch] text-sm leading-relaxed text-landing-ink/75 md:text-base">
+            <p className="mx-auto mb-6 max-w-[62ch] text-sm leading-relaxed text-landing-ink/75 md:text-base">
               Kapwa Help is free and open source. It runs on free-tier tools, so a disaster response doesn't stall when a budget runs out. Fork the repo, deploy it for your own community, or help us improve it.
             </p>
             <a
               href="https://github.com/kapwa-help/kapwa-help"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md bg-landing-sunset px-5 py-3 text-sm font-semibold text-landing-cream hover:opacity-90 md:text-base"
+              className="inline-flex items-center rounded-md bg-landing-sunset px-5 py-3 text-sm font-semibold text-landing-cream hover:opacity-90 md:text-base"
             >
               View on GitHub →
             </a>
