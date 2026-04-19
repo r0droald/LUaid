@@ -74,10 +74,15 @@ test("report page shows hazard form when selected", async ({ page }) => {
 test("root renders the landing page", async ({ page }) => {
   await page.goto("/");
 
-  // H1 text
-  await expect(page.getByRole("heading", { level: 1, name: /citizen-led disaster relief/i })).toBeVisible();
+  // H1 copy
+  await expect(
+    page.getByRole("heading", { level: 1, name: /built on the ground/i }),
+  ).toBeVisible();
 
-  // Primary CTA
+  // Ginawa sa La Union stamp (provenance signal)
+  await expect(page.getByText(/ginawa sa la union/i)).toBeVisible();
+
+  // Primary CTA → /demo/en
   const primaryCta = page.getByRole("link", { name: /view live demo/i }).first();
   await expect(primaryCta).toBeVisible();
   await expect(primaryCta).toHaveAttribute("href", "/demo/en");
@@ -87,7 +92,27 @@ test("root renders the landing page", async ({ page }) => {
   await expect(headerCta).toBeVisible();
 
   // Hero screenshot
-  await expect(page.getByRole("img", { name: /kapwa help dashboard/i })).toBeVisible();
+  await expect(
+    page.getByRole("img", { name: /kapwa help dashboard/i }),
+  ).toBeVisible();
+
+  // Story section H2
+  await expect(
+    page.getByRole("heading", { level: 2, name: /born during emong/i }),
+  ).toBeVisible();
+
+  // Features section presence (live map is #1)
+  await expect(
+    page.getByRole("heading", { level: 3, name: /see where aid is going/i }),
+  ).toBeVisible();
+
+  // CTA section
+  await expect(
+    page.getByRole("heading", { level: 2, name: /every skill set/i }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /get in touch/i }),
+  ).toHaveAttribute("href", "mailto:contact@kapwahelp.org");
 
   // Footer
   await expect(page.getByText(/mit license/i)).toBeVisible();
