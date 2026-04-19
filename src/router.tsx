@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate, useParams, useLocation } from "react-router";
 import { RootLayout } from "./components/RootLayout";
 import { lazyWithReload } from "@/lib/lazy-reload";
-import LandingPage from "./pages/LandingPage";
+const LandingPage = lazyWithReload(() => import("./pages/LandingPage"));
 
 const ReliefMapPage = lazyWithReload(() => import("./pages/ReliefMapPage"));
 const TransparencyPage = lazyWithReload(() => import("./pages/TransparencyPage"));
