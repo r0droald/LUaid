@@ -251,6 +251,29 @@ export default function LandingPage() {
           </a>
         </div>
       </section>
+
+      {/* ---------- FOOTER ---------- */}
+      <footer className="border-t-[6px] border-landing-sunset bg-landing-ink px-6 py-8 text-xs text-landing-cream md:px-10">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
+          <p className="text-landing-cream/60">
+            <span className="mr-5">MIT License</span>
+            <span>Built for La Union, shared with everyone</span>
+          </p>
+          <div className="flex gap-4">
+            <a
+              href="https://github.com/kapwa-help/kapwa-help"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:opacity-80"
+            >
+              GitHub
+            </a>
+            <a href="mailto:contact@kapwahelp.org" className="hover:opacity-80">
+              Contact
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
