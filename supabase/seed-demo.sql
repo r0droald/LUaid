@@ -397,14 +397,3 @@ ON CONFLICT (id) DO UPDATE SET
   reported_by = EXCLUDED.reported_by,
   contact_phone = EXCLUDED.contact_phone;
 
--- ============================================================
--- Deployments (for confirmed needs)
--- ============================================================
-INSERT INTO deployments (id, event_id, hub_id, need_id, date, notes) VALUES
-  ('20000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001',
-   'c0000000-0000-0000-0000-000000000002', 'd0000000-0000-0000-0000-000000000004',
-   '2026-03-30', 'Boat delivery coordinated with coast guard'),
-  ('20000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000001',
-   'c0000000-0000-0000-0000-000000000004', 'd0000000-0000-0000-0000-000000000007',
-   '2026-04-01', 'Regular truck delivery')
-ON CONFLICT DO NOTHING;
