@@ -45,19 +45,28 @@ ON CONFLICT (id) DO UPDATE SET
 INSERT INTO deployment_hubs (id, event_id, name, lat, lng, description, notes) VALUES
   ('c0000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001',
    'San Juan Municipal Hall', 16.6619, 120.3269, 'Main coordination center',
-   'Open 24/7 during relief ops. Running low on hot meals — requesting more rice and canned goods. Volunteers needed for evening shifts. Coordinator: Mayor''s Office, 0917-555-0101.'),
+   'Open 24/7 during relief ops. Running low on hot meals — requesting more rice and canned goods. Volunteers needed for evening shifts. Coordinator: Mayor''s Office, 09175550101.'),
   ('c0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000001',
    'Bacnotan Community Center', 16.7314, 120.3494, 'Northern relief staging area',
-   'Staging area currently at ~80% capacity. Urgent need for blankets and children''s clothing for evacuees. Contact Brgy. Capt. Reyes at 0917-555-0202.'),
+   'Staging area currently at ~80% capacity. Urgent need for blankets and children''s clothing for evacuees. Contact Brgy. Capt. Reyes at 09175550202.'),
   ('c0000000-0000-0000-0000-000000000003', 'a0000000-0000-0000-0000-000000000001',
-   'San Fernando City Hall', 16.6159, 120.3167, 'Provincial capital hub',
-   'Serves as backup comms center. Supplies adequate. Looking for volunteers for Saturday and Sunday shifts. Satellite phone available for remote coordination.'),
+   'San Fernando City Hall', 16.6159, 120.3267, 'Provincial capital hub',
+   'Serves as backup comms center. Supplies adequate. Looking for volunteers for Saturday and Sunday shifts. Satellite phone available for remote coordination. Coordinator: Ms. Aquino, 09175550303.'),
   ('c0000000-0000-0000-0000-000000000004', 'a0000000-0000-0000-0000-000000000001',
    'Bauang Relief Center', 16.5328, 120.3378, 'Southern relief distribution',
-   'Southern distribution point. Drinking water stock lasts ~2 days — resupply requested. Medical team on-site until 6 PM daily. Bridge access OK via truck.'),
+   'Southern distribution point. Drinking water stock lasts ~2 days — resupply requested. Medical team on-site until 6 PM daily. Bridge access OK via truck. Coordinator: Mr. Villanueva, 09175550404.'),
   ('c0000000-0000-0000-0000-000000000005', 'a0000000-0000-0000-0000-000000000001',
-   'Luna Emergency Shelter', 16.8555, 120.3803, 'Emergency shelter for evacuees',
-   'Capacity: ~200 people (currently sheltering 145). Need hygiene kits and additional cots. Road access via 4x4 only after landslide at km 14.')
+   'Luna Emergency Shelter', 16.8555, 120.3603, 'Emergency shelter for evacuees',
+   'Capacity: ~200 people (currently sheltering 145). Need hygiene kits and additional cots. Road access via 4x4 only after landslide at km 14. Coordinator: Ms. Domingo, 09175550505.'),
+  ('c0000000-0000-0000-0000-000000000006', 'a0000000-0000-0000-0000-000000000001',
+   'Agoo Parish Hall', 16.3267, 120.3695, 'Southernmost coordination point',
+   'Parish hall converted to staging area. Good road access. Kitchen serves 300 meals/day. Low on rice and cooking oil. Coordinator: Fr. Castillo, 09175550606.'),
+  ('c0000000-0000-0000-0000-000000000007', 'a0000000-0000-0000-0000-000000000001',
+   'Aringay Barangay Hall', 16.4008, 120.3554, 'Central-south relief post',
+   'New staging area stood up 2026-04-02. Functioning well but limited vehicle access during high tide. Need fuel for the delivery truck. Coordinator: Brgy. Capt. Molina, 09175550707.'),
+  ('c0000000-0000-0000-0000-000000000008', 'a0000000-0000-0000-0000-000000000001',
+   'Balaoan Community Gym', 16.8122, 120.3878, 'Northern alternate shelter',
+   'Alternate shelter for Luna overflow. 50-person capacity, currently 28 occupied. Volunteer cooks needed mornings. Coordinator: Mr. Pascual, 09175550808.')
 ON CONFLICT (id) DO UPDATE SET
   description = EXCLUDED.description,
   notes = EXCLUDED.notes;
@@ -108,16 +117,38 @@ BEGIN
     ('c0000000-0000-0000-0000-000000000003', cat_medical)
   ON CONFLICT DO NOTHING;
 
-  -- Bauang hub: hot meals, canned food
+  -- Bauang hub: hot meals, water, canned food
   INSERT INTO hub_inventory (hub_id, aid_category_id) VALUES
     ('c0000000-0000-0000-0000-000000000004', cat_hot_meals),
+    ('c0000000-0000-0000-0000-000000000004', cat_water),
     ('c0000000-0000-0000-0000-000000000004', cat_canned)
   ON CONFLICT DO NOTHING;
 
-  -- Luna hub: shelter, construction materials
+  -- Luna hub: shelter, construction, hygiene
   INSERT INTO hub_inventory (hub_id, aid_category_id) VALUES
     ('c0000000-0000-0000-0000-000000000005', cat_shelter),
-    ('c0000000-0000-0000-0000-000000000005', cat_construction)
+    ('c0000000-0000-0000-0000-000000000005', cat_construction),
+    ('c0000000-0000-0000-0000-000000000005', cat_hygiene)
+  ON CONFLICT DO NOTHING;
+
+  -- Agoo hub: hot meals, canned food, clothing
+  INSERT INTO hub_inventory (hub_id, aid_category_id) VALUES
+    ('c0000000-0000-0000-0000-000000000006', cat_hot_meals),
+    ('c0000000-0000-0000-0000-000000000006', cat_canned),
+    ('c0000000-0000-0000-0000-000000000006', cat_clothing)
+  ON CONFLICT DO NOTHING;
+
+  -- Aringay hub: water, medical, hygiene
+  INSERT INTO hub_inventory (hub_id, aid_category_id) VALUES
+    ('c0000000-0000-0000-0000-000000000007', cat_water),
+    ('c0000000-0000-0000-0000-000000000007', cat_medical),
+    ('c0000000-0000-0000-0000-000000000007', cat_hygiene)
+  ON CONFLICT DO NOTHING;
+
+  -- Balaoan hub: shelter, clothing
+  INSERT INTO hub_inventory (hub_id, aid_category_id) VALUES
+    ('c0000000-0000-0000-0000-000000000008', cat_shelter),
+    ('c0000000-0000-0000-0000-000000000008', cat_clothing)
   ON CONFLICT DO NOTHING;
 
   -- ============================================================
