@@ -195,10 +195,10 @@ export default function LandingPage() {
             <p className="mb-2 font-logo text-[14px] tracking-[0.2em] text-landing-sunset">
               05 / OPEN SOURCE
             </p>
-            <h3 className="mx-auto mb-4 max-w-[18ch] font-logo text-[28px] leading-tight text-landing-ink md:text-[40px]">
+            <h3 className="mx-auto mb-4 max-w-[32ch] font-logo text-[28px] leading-tight text-landing-ink md:text-[40px]">
               Take it. Run it for your community.
             </h3>
-            <p className="mx-auto mb-6 max-w-[62ch] text-sm leading-relaxed text-landing-ink/75 md:text-base">
+            <p className="mx-auto mb-6 max-w-[72ch] text-sm leading-relaxed text-landing-ink/75 md:text-base">
               Kapwa Help is free and open source. It runs on free-tier tools, so a disaster response doesn't stall when a budget runs out. Fork the repo, deploy it for your own community, or help us improve it.
             </p>
             <a
