@@ -4,6 +4,7 @@ import {
   MapContainer,
   TileLayer,
   Marker,
+  Tooltip,
   ZoomControl,
   useMap,
 } from "react-leaflet";
@@ -16,6 +17,13 @@ const STATUS_COLORS: Record<string, string> = {
   verified: "var(--color-error)",
   in_transit: "var(--color-warning)",
   confirmed: "var(--color-primary)",
+};
+
+const STATUS_LABELS: Record<string, string> = {
+  pending: "Pending",
+  verified: "Verified",
+  in_transit: "In transit",
+  confirmed: "Confirmed",
 };
 
 function makeNeedIcon(status: string, urgency?: string) {
@@ -153,40 +161,59 @@ export default function ReliefMapLeaflet({
           needsPoints.map((point) => {
             const categoryNames =
               point.categories.map((c) => c.name).join(", ") || "uncategorized";
+            const label = `${STATUS_LABELS[point.status] ?? point.status} need: ${categoryNames}`;
             return (
               <Marker
                 key={`need-${point.id}`}
                 position={[point.lat, point.lng]}
                 icon={makeNeedIcon(point.status, point.urgency)}
-                title={`${point.status} need: ${categoryNames}`}
+                title={label}
                 eventHandlers={{ click: () => onNeedSelect(point) }}
-              />
+              >
+                <Tooltip direction="top" offset={[0, -12]} className="kapwa-marker-tooltip">
+                  {label}
+                </Tooltip>
+              </Marker>
             );
           })}
 
         {/* Hub markers */}
         {visibleLayers.hubs &&
-          hubs.map((hub) => (
-            <Marker
-              key={`hub-${hub.id}`}
-              position={[hub.lat, hub.lng]}
-              icon={makeHubIcon()}
-              title={`Relief hub: ${hub.name}`}
-              eventHandlers={{ click: () => onHubSelect(hub) }}
-            />
-          ))}
+          hubs.map((hub) => {
+            const label = `Relief hub: ${hub.name}`;
+            return (
+              <Marker
+                key={`hub-${hub.id}`}
+                position={[hub.lat, hub.lng]}
+                icon={makeHubIcon()}
+                title={label}
+                eventHandlers={{ click: () => onHubSelect(hub) }}
+              >
+                <Tooltip direction="top" offset={[0, -11]} className="kapwa-marker-tooltip">
+                  {label}
+                </Tooltip>
+              </Marker>
+            );
+          })}
 
         {/* Hazard markers */}
         {visibleLayers.hazards &&
-          hazards.map((hazard) => (
-            <Marker
-              key={`hazard-${hazard.id}`}
-              position={[hazard.lat, hazard.lng]}
-              icon={makeHazardIcon()}
-              title={`Hazard: ${hazard.description}`}
-              eventHandlers={{ click: () => onHazardSelect(hazard) }}
-            />
-          ))}
+          hazards.map((hazard) => {
+            const label = `Hazard: ${hazard.description}`;
+            return (
+              <Marker
+                key={`hazard-${hazard.id}`}
+                position={[hazard.lat, hazard.lng]}
+                icon={makeHazardIcon()}
+                title={label}
+                eventHandlers={{ click: () => onHazardSelect(hazard) }}
+              >
+                <Tooltip direction="top" offset={[0, -20]} className="kapwa-marker-tooltip">
+                  {label}
+                </Tooltip>
+              </Marker>
+            );
+          })}
       </MapContainer>
       {tilesUnavailable && (
         <div
