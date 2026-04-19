@@ -50,20 +50,20 @@ export default function Header() {
   const showInvite = AUTH_MODE === 'strict' && isAdmin;
 
   const handleLocaleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const subPath = locale ? location.pathname.replace(`/${locale}`, "") : "";
-    navigate(`/${e.target.value}${subPath}`);
+    const subPath = locale ? location.pathname.replace(`/demo/${locale}`, "") : "";
+    navigate(`/demo/${e.target.value}${subPath}`);
   };
 
   const navItems = [
-    { to: `/${locale}`, label: t("Navigation.reliefMap"), end: true },
-    { to: `/${locale}/dashboard`, label: t("Navigation.dashboard") },
+    { to: `/demo/${locale}`, label: t("Navigation.reliefMap"), end: true },
+    { to: `/demo/${locale}/dashboard`, label: t("Navigation.dashboard") },
   ];
 
   return (
     <header className="bg-secondary shadow-[0_2px_8px_rgba(0,0,0,0.3)]">
       <div className="mx-auto flex max-w-7xl items-center px-6 py-4">
         <div className="flex flex-1 items-center">
-          <Link to={`/${locale}`} className="flex items-center gap-2 font-logo text-xl font-bold text-white hover:text-neutral-100">
+          <Link to="/" className="flex items-center gap-2 font-logo text-xl font-bold text-white hover:text-neutral-100">
             <img src="/icons/kapwahelp_v1.svg" alt="" aria-hidden="true" className="h-8 w-8" />
             Kapwa Help
           </Link>
@@ -106,7 +106,7 @@ export default function Header() {
             </select>
           </div>
           <Link
-            to={`/${locale}/report`}
+            to={`/demo/${locale}/report`}
             className="rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white shadow-[0_0_12px_rgba(14,154,167,0.3)] hover:bg-primary/80 hover:shadow-[0_0_16px_rgba(14,154,167,0.4)] transition-all duration-200"
           >
             {t("Navigation.report")}

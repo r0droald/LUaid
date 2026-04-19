@@ -28,6 +28,10 @@ Source of truth: `src/index.css` via Tailwind v4 `@theme inline`.
 | `neutral-400` | `#9AD1D4` | Muted text, borders, labels (soft teal) |
 | `base` | `#001A26` | Page background (deep navy) |
 
+### Landing-only tokens
+
+`landing-cream`, `landing-ink`, `landing-sunset`, `landing-sunset-deep`, and `landing-live` are defined in `@theme inline` but scoped by convention to the landing page (`src/pages/LandingPage.tsx`, `src/components/LandingHeader.tsx`, `src/styles/landing.css`). Do NOT use them on `/demo/*` routes — those keep the existing dark palette.
+
 ## Theme
 
 Single dark theme. Dark `bg-base` background with `bg-secondary` card surfaces.

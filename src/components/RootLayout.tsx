@@ -34,7 +34,7 @@ export function RootLayout() {
   }, []);
 
   if (!isValid) {
-    return <Navigate to="/en" replace />;
+    return <Navigate to="/demo/en" replace />;
   }
 
   return (

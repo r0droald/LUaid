@@ -19,7 +19,8 @@ export default defineConfig({
         short_name: "Kapwa Help",
         description:
           "Citizen-led disaster relief coordination for La Union, Philippines",
-        start_url: "/",
+        start_url: "/demo/en",
+        scope: "/",
         display: "standalone",
         orientation: "portrait",
         background_color: "#0a0a0a",
