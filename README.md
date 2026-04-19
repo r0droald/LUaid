@@ -8,7 +8,7 @@ Kapwa Help is a Progressive Web App that tracks donations, volunteer deployments
 
 We publish this software openly in the hope that it's useful for disaster relief operations in your community too.
 
-![Kapwa Help dashboard](docs/dashboard-screenshot.png)
+![Kapwa Help relief map](docs/kapwa-help-banner.png)
 
 ## What It Does
 
