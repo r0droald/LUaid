@@ -55,7 +55,7 @@ Three faces, all with a clear role:
 | Italic accent (decorative phrases, pull quotes, "accent" spans inside headlines) | **Instrument Serif (italic)** | New Google Font load. Used sparingly — roughly 4–6 places total. |
 | Body (running prose, nav, lede) | **Public Sans** 400/500/600/700 | New Google Font load. Replaces system-ui on the landing page only; the app keeps system-ui. |
 
-Font-load strategy: both Google Fonts use `display=swap` with a `preconnect` to `fonts.googleapis.com`. Kagitingan already loaded. Total new landing-only font payload: Public Sans (≈40 KB for used weights) + Instrument Serif italic (~20 KB).
+Font-load strategy: Public Sans and Instrument Serif are loaded **only from within the landing page chunk** — via CSS `@import` or equivalent inside a module imported by `LandingPage.tsx`, not via `<link>` tags in `index.html`. This keeps them off of every non-landing route, which matters for future tenant subdomain deployments (e.g. `launion.kapwahelp.org/demo/en`) that route directly to the app and never render the landing page. Kagitingan is already loaded site-wide for the logo, so it's free for landing headlines. Total net landing-only font payload: Public Sans (≈40 KB for used weights) + Instrument Serif italic (~20 KB), loaded only on `/`.
 
 ## Color palette (landing-specific)
 
@@ -150,7 +150,7 @@ Technical vocabulary (service worker, PWA, Supabase, Workbox, etc.) is deliberat
 - Landing route is already code-split (PR #99). Landing-only deps (Public Sans, Instrument Serif, additional Tailwind utilities if needed) stay out of the `/demo/*` chunks.
 - Service worker is unchanged — landing is not offline-first and doesn't need to be cached aggressively.
 - Kagitingan already loaded via `src/index.css` `@font-face`; reuse with the `font-logo` utility or extend Tailwind config to expose `font-display` as an alias that resolves to the same stack.
-- Google Fonts loaded via `<link rel="preconnect">` + `<link href>` in `index.html` so they don't need to round-trip through `@import`.
+- Google Fonts (Public Sans, Instrument Serif) loaded from within the landing page chunk — NOT from `index.html`. This is critical for tenant subdomain deployments: `launion.kapwahelp.org/demo/en` and similar should not fetch landing-only fonts. Implementation option: a landing-specific CSS module with `@import` at top, imported by `LandingPage.tsx`; bundler tree-shakes it out of other routes' chunks.
 - Testing:
   - Existing smoke test (`tests/e2e/smoke.spec.ts`) tests for hero, CTAs, image, footer — assertions may need updating for new copy and structure.
   - New content assertions: "Live" map-feature label, numbered feature list, "Ginawa sa La Union" stamp text.
