@@ -20,10 +20,24 @@
       Colors are hardcoded from .claude/rules/design-system.md (base,
       neutral-100, neutral-400) because inline CSS cannot reference the
       Tailwind theme tokens.
+
+      The shell is scoped to /demo/* routes only. On the landing page
+      the cream background + fast-painting hero make the teal shell flash
+      look worse than a plain cream screen. The inline script below runs
+      before paint and toggles `html.no-shell` for non-demo routes; CSS
+      then hides the shell and switches the body bg to landing cream
+      (--color-landing-cream, #F4EDDF).
     -->
+    <script>
+      if (!location.pathname.startsWith("/demo")) {
+        document.documentElement.classList.add("no-shell");
+      }
+    </script>
     <style>
       html, body { margin: 0; padding: 0; background: #001A26; color: #CCDBDC;
         font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+      html.no-shell, html.no-shell body { background: #F4EDDF; color: #1C1611; }
+      html.no-shell .shell { display: none; }
       #root { min-height: 100vh; }
       .shell { display: flex; flex-direction: column; min-height: 100vh; }
       .shell-header { display: flex; align-items: center; padding: 0.75rem 1rem;
